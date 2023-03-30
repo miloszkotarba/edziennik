@@ -132,8 +132,8 @@
         <div class="tag-box">
             <span class="tag">Software</span>
             <span class="tag">Freelancer</span>
-            <span class="tag">Developer</span>
-            <span class="tag">Blog</span>
+            <span class="tag">CarpeDiem</span>
+            <span class="tag">SzkołaToMojaPasja</span>
             <span class="tag">Portfolio</span>
             <span class="tag">Website Tips</span>
             <span class="tag">IT</span>
