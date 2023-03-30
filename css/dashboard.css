@@ -1,0 +1,164 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: rgb(245, 245, 245);
+  overflow: hidden;
+  height: 100vh;
+}
+
+.container {
+  display: flex;
+}
+
+header {
+  height: 100px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  font-size: 1.3rem;
+  padding: 1rem 1rem;
+  border-bottom: 1px solid rgb(122, 122, 122);
+  opacity: 0.95;
+}
+
+header .left h2 {
+  font-size: 1.7rem;
+  font-weight: 400;
+  position: relative;
+  letter-spacing: 0.05rem;
+}
+
+header .left h2::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: -5px;
+  width: 15px;
+  height: 3px;
+  background: rgb(19, 122, 19);
+  border-radius: 2px;
+}
+
+header .left h2::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: -5px;
+  width: 3px;
+  height: 15px;
+  background: rgb(19, 122, 19);
+  border-radius: 2px;
+}
+
+header .right {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+header .right span {
+  font-weight: 300;
+  font-size: 1.1rem;
+  margin-right: 0.5rem;
+}
+
+header .right .avatar i {
+  font-size: 2.5rem;
+  margin-right: 1.5rem;
+  color: rgb(19, 122, 19);
+  display: block;
+}
+
+header .right a {
+  text-decoration: none;
+  color: black;
+  font-size: 1rem;
+  border: 1px solid black;
+  padding: 8px 12px;
+  border-radius: 10px;
+  display: block;
+}
+
+/* nav */
+nav {
+  position: sticky;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  max-width: 230px;
+  width: 100%;
+  overflow-x: hidden;
+  background: rgba(37, 60, 120, 0.99);
+}
+
+nav ul li {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+nav ul li a {
+  color: #d2d2d2;
+  font-size: 1.1rem;
+  text-decoration: none;
+  padding: 1.2rem 0.5rem;
+  display: flex;
+  align-items: center;
+  transition: all 0.2s ease;
+}
+
+nav ul li a:hover {
+  background: rgba(37, 60, 120, 0.97);
+  color: #fff;
+}
+
+nav ul li i {
+  font-size: 1.6rem;
+  margin-right: 5px;
+  width: 30px;
+  margin-left: 10px;
+}
+
+nav ul li span {
+  display: inline-block;
+  height: 100%;
+  font-size: 1rem;
+  font-weight: 300;
+}
+
+main {
+  width: 100%;
+  margin: 0 auto;
+  padding: 1.5rem 2rem;
+}
+
+@media only screen and (max-width: 800px) {
+  .container {
+    flex-direction: column;
+  }
+
+  nav {
+    position: relative;
+    height: auto;
+    max-width: 100vw;
+    width: 100%;
+  }
+
+  header {
+    padding: 0.5rem;
+    height: 150px;
+  }
+}

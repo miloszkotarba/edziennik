@@ -1,0 +1,383 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+:root {
+  --dark-color: #161927;
+  --dark2-color: #252a41;
+  --purple: #7373e7;
+  --mild-color: #efefef;
+  --green: #354d3c;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--dark-color);
+}
+
+html {
+  font-family: "Poppins", sans-serif;
+}
+
+.typed-cursor {
+  color: white;
+}
+
+.header {
+  overflow: hidden;
+  background: var(--dark2-color);
+  display: flex;
+  justify-content: space-evenly;
+  padding: 3rem 3.5rem;
+}
+
+.header .left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.left .title {
+  margin-bottom: 1rem;
+}
+
+.title h1 {
+  color: var(--mild-color);
+  letter-spacing: 0.1rem;
+}
+
+.title h1 span.name {
+  color: var(--purple);
+}
+
+.left span.text {
+  color: white;
+  font-weight: 300;
+}
+
+.left .btn-box {
+  margin-top: 1.3rem;
+}
+
+.btn-box button.first {
+  margin-right: 1rem;
+  background: var(--purple);
+  border: none;
+}
+
+.btn-box button,
+.wrapper .btn button {
+  font-size: 1.02rem;
+  padding: 0.9rem 2.2rem;
+  background: none;
+  border: 1px solid var(--mild-color);
+  color: var(--mild-color);
+  border-radius: 2rem;
+  cursor: pointer;
+}
+
+.btn-box button a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.header .right img {
+  box-shadow: 0px 0px 10px 1px #0f111b;
+  width: 17rem;
+  height: 17rem;
+  border-radius: 50%;
+}
+
+/* main */
+main {
+  display: flex;
+  max-width: 1300px;
+  width: 100%;
+  margin: 2rem auto;
+}
+
+main .left {
+  flex-basis: calc(100% / 10 * 7);
+  padding: 0 1.5rem;
+}
+
+.left .title h3,
+.right .title h3 {
+  color: white;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+  font-size: 1.4rem;
+}
+
+.left .post {
+  display: flex;
+  margin-bottom: 1.2rem;
+}
+
+.post .img img {
+  opacity: 0.9;
+  width: 250px;
+  height: 100%;
+  border-radius: 5px 0 0 5px;
+}
+
+.post .container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0.8rem 1.2rem;
+  background: var(--dark2-color);
+  color: var(--mild-color);
+  border-radius: 0 5px 5px 0;
+}
+
+.container .title {
+  font-weight: 500;
+}
+
+.container .content {
+  font-size: 0.9rem;
+  line-height: 1.6rem;
+  color: rgb(214, 214, 214);
+  opacity: 0.95;
+}
+
+main .right {
+  flex-basis: calc(100% / 10 * 3);
+  padding-right: 1.5rem;
+}
+
+.right .topics {
+  width: 100%;
+  margin: 0 auto;
+  color: white;
+  margin-bottom: 2rem;
+}
+
+.topics .item {
+  display: flex;
+  background: var(--dark2-color);
+  margin-bottom: 0.8rem;
+  align-items: center;
+  border-radius: 0 4px 4px 0;
+}
+
+.item .icon,
+.item .text {
+  padding: 0.15rem 0.8rem;
+}
+
+.item .icon {
+  font-size: 1.2rem;
+  background: var(--green);
+  border-radius: 4px 0 0 4px;
+  color: var(--mild-color);
+  opacity: 0.9;
+}
+
+.item .text {
+  font-size: 0.85rem;
+  width: 100%;
+}
+
+.right .tag-box {
+  margin: 0 auto;
+  width: 100%;
+  background: var(--dark2-color);
+  border-radius: 5px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.tag-box span {
+  color: #efefef;
+  font-size: 0.9rem;
+  background: #e19214;
+  padding: 0.16rem 0.35rem;
+  display: inline-block;
+  margin: 0.15rem 0.04rem;
+  border-radius: 5px;
+  opacity: 0.9;
+  font-weight: 300;
+}
+
+.tag-box span::before {
+  content: "#";
+}
+
+main .right .staff {
+  margin: 0 auto;
+  width: 100%;
+  background: var(--dark2-color);
+  border-radius: 5px;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom: 2rem;
+}
+
+.staff .person {
+  display: flex;
+  flex-direction: column;
+  opacity: 0.9;
+}
+
+.person .name span {
+  color: var(--mild-color);
+  font-size: 0.9rem;
+  display: block;
+  text-align: center;
+  font-weight: 500;
+}
+
+.name span:nth-child(2) {
+  color: var(--purple);
+  font-weight: 400;
+}
+
+.person .avatar img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  box-shadow: 0 0 25px 2px #16162a;
+  opacity: 0.9;
+}
+
+/* media */
+@media screen and (max-width: 950px) {
+  html {
+    font-size: 15px;
+  }
+  main .left .post .img img {
+    width: 200px;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  main .left .post .img img {
+    width: 150px;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  main {
+    flex-direction: column-reverse;
+  }
+
+  main .left .post {
+    flex-direction: column-reverse;
+  }
+
+  .post .container {
+    border-radius: 5px 5px 0 0;
+  }
+
+  main .right {
+    margin-left: 1rem;
+  }
+
+  .right .title h3 {
+    text-align: left !important;
+  }
+
+  .right .tag-box {
+    margin-bottom: 2rem;
+  }
+
+  main .left .post .img img {
+    width: 100%;
+    border-radius: 0 0 5px 5px;
+  }
+}
+
+/* 404 */
+.container-center {
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  place-items: center;
+}
+
+.container-center .wrapper {
+  text-align: center;
+}
+
+.wrapper h1 {
+  color: var(--mild-color);
+  font-size: 13rem;
+  line-height: 13rem;
+  font-weight: 500;
+}
+
+.wrapper > span {
+  color: var(--purple);
+  font-size: 3rem;
+  margin: 0;
+  font-weight: 300;
+}
+
+.wrapper .btn {
+  margin-top: 1.5rem;
+}
+
+.wrapper .btn button:hover {
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.wrapper .btn button {
+  position: relative;
+  opacity: 0.9;
+}
+
+.wrapper .btn button::before {
+  content: "";
+  width: 0%;
+  height: -100%;
+  background: var(--purple);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  border-radius: 2rem;
+  transition: all ease 0.7s;
+}
+
+.wrapper .btn button:hover::before {
+  width: 100%;
+  height: 100%;
+}
+
+.wrapper .btn span {
+  text-decoration: none;
+  color: var(--mild-color);
+  font-size: 1.2rem;
+  letter-spacing: 0.04rem;
+  z-index: 1000;
+  position: relative;
+}
+
+@media screen and (max-width: 800px) {
+  .header {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+
+  .header .left {
+    margin-top: 2rem;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .header .left .btn-box {
+    width: 100vw;
+  }
+
+  .header .left .title h1 {
+    font-size: 1.9rem;
+  }
+}

@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: url("/img/tapeta.jpg") center no-repeat;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.swal2-title {
+    font-weight: 400 !important;
+    user-select: none;
+    cursor: pointer;
+}
+
+
+.login-box {
+    max-width: 1000px;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    box-shadow: 0px 0px 10px -5px gray;
+}
+
+.left, .right {
+    width: 50%;
+    padding: 50px 60px;
+}
+
+.left {
+    background: #0c62b2;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.left i {
+    font-size: 2.7rem;
+    vertical-align: middle;
+    color: white;
+}
+
+.right {
+    background: white;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    position: relative;
+}
+
+.photo {
+    text-align: center;
+    margin-bottom: 0.8rem;
+}
+
+.photo img {
+    width: 80px;
+    height: auto;
+    box-shadow: 0px 0px 20px -2px #cccccc;
+    border-radius: 50%;
+}
+
+.right h1 {
+    font-weight: 300;
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.right input {
+    width: 100%;
+    font-size: 0.95rem;
+    padding: 7px 10px;
+    margin: 0.5rem 0;
+    border: 0.8px solid #a6a6a6;
+    border-radius: 6px;
+}
+
+.right input[type="submit"] {
+    margin-top: 2.3rem;
+    background: #0c62b2;
+    color: white;
+    border: none;
+    display: block;
+    border-radius: 5px;
+    font-size: 1rem;
+    padding: 10px;
+}
+
+input::placeholder {
+    font-weight: 400;
+}
+
+.link {
+    margin-top: -0.3rem;
+    margin-right: 0.3rem;
+    text-align: right;
+    font-size: 0.9rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+.link a {
+    text-decoration: none;
+    color: #494949;
+    font-weight: 300;
+}
+
+@media only screen and (max-width: 850px) {
+
+    .login-box {
+        flex-direction: column;
+        width: 80%;
+    }
+
+    .right, .left {
+        width: 120%;
+    }
+
+    .left {
+        border-radius: 8px 8px 0 0;
+    }
+
+    .right {
+        border-radius: 0px 0px 8px 8px;
+    }
+}
