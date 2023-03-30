@@ -133,7 +133,7 @@
             <span class="tag">Software</span>
             <span class="tag">Freelancer</span>
             <span class="tag">CarpeDiem</span>
-            <span class="tag">SzkołaŻycia</span>
+            <span class="tag">HowAreYou</span>
             <span class="tag">Portfolio</span>
             <span class="tag">Website Tips</span>
             <span class="tag">IT</span>
