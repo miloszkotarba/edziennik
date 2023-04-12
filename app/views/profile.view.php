@@ -12,7 +12,7 @@ Page::displayNavigation();
             </div>
             <div class="about-user">
                 <h2><?= $_SESSION['usersName']." ". $_SESSION['usersSurname']?></h2>
-                <span>Poland, Lodz - ul. Józefa Chełmońskiego 3/2</span>
+                <span>USA, Lodz - ul. Józefa Chełmońskiego 3/2</span>
             </div>
             <div class="button">
                 <a href="#">Edit account</a>
