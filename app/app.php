@@ -5,7 +5,8 @@ class App
     protected $routes = [
         '/home',
         '/login',
-        '/dashboard'
+        '/dashboard',
+        '/profile'
     ];
     protected $controller = 'home';
     protected $method = 'index';

@@ -79,6 +79,20 @@ session_start();
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
+                                <label for="form_username">Login *</label>
+                                <input id="form_username" type="name" name="username" class="form-control"
+                                       required="required" data-error="Uzupełnij to pole."
+                                       value="<?php if (isset($_SESSION['username'])) {
+                                           echo $_SESSION['username'];
+                                           unset($_SESSION['username']);
+                                       } ?>">
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
                                 <label for="form_password">Hasło *</label>
                                 <input id="form_password" type="password" name="password" class="form-control"
                                        required="required" data-error="Uzupełnij to pole.">

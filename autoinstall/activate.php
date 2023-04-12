@@ -26,6 +26,11 @@ $email = new Formularz("$email");
 if ($email->validate_email()) $_SESSION['email'] = $email->get_safe_value();
 else $_SESSION['error'] = "Pole <b>Email</b> jest niepoprawne.";
 
+$username = $_POST['username'];
+$username = new Formularz("$username","yes",0,5);
+if($username->validate_string()) $_SESSION['username'] = $username->get_safe_value();
+else $_SESSION['error'] = "Pole <b>Login</b> jest niepoprawne";
+
 $haslo = $_POST['password'];
 $haslo = new Formularz("$haslo", "yes", "0", "4");
 
@@ -66,6 +71,7 @@ $db_name = $db_name->get_safe_value();
 $nazwisko = $nazwisko->get_safe_value();
 $imie = $imie->get_safe_value();
 $email = $email->get_safe_value();
+$login = $username->get_safe_value();
 
 
 $pol = new mysqli("$db_host", "$db_username", "$db_password", "$db_name");
@@ -80,46 +86,102 @@ if ($pol->connect_errno != 0) {
 }
 
 ///dodanie tabeli USERS do bazy danych uzytkownika
-$sql = "CREATE TABLE `$db_name`.`users` (`id` INT NOT NULL AUTO_INCREMENT , `nazwisko` VARCHAR(50) CHARACTER SET utf8 COLLATE utf8_polish_ci NOT NULL , `imie` VARCHAR(50) CHARACTER SET utf8 COLLATE utf8_polish_ci NOT NULL , `email` VARCHAR(50) NOT NULL , `password` VARCHAR(50) NOT NULL , PRIMARY KEY (`id`));";
+$sql = '
+-- phpMyAdmin SQL Dump
+-- version 4.6.6deb4+deb9u2
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost:3306
+-- Czas generowania: 30 Mar 2023, 18:14
+-- Wersja serwera: 10.3.36-MariaDB-0+deb10u2
+-- Wersja PHP: 7.3.31-1~deb10u2
 
-if (!$pol->query($sql)) {
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Baza danych: `dziennik`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `users`
+--
+
+CREATE TABLE `users` (
+`usersId` int(11) NOT NULL,
+  `usersName` varchar(50) CHARACTER SET utf8 COLLATE utf8_polish_ci NOT NULL,
+  `usersSurname` varchar(60) CHARACTER SET utf8 COLLATE utf8_polish_ci NOT NULL,
+  `usersEmail` varchar(60) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `usersLogin` varchar(60) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `usersPassword` varchar(60) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `usersRole` int(2) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Indeksy dla zrzutów tabel
+--
+
+--
+-- Indexes for table `users`
+--
+               ALTER TABLE `users`
+  ADD PRIMARY KEY (`usersId`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+                      --
+-- AUTO_INCREMENT dla tabeli `users`
+--
+ALTER TABLE `users`
+  MODIFY `usersId` int(11) NOT NULL AUTO_INCREMENT;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+';
+if (!$pol->multi_query($sql)) {
     $_SESSION['error'] = "Błąd połączenia z bazą danych! Brak uprawnień: <b>Create_priv</b>.";
     header('Location: index.php');
     $pol->close();
     exit();
 };
 
-///dodanie administratora do tabeli USERS
-$sql2 = "INSERT INTO `users` (`id`, `nazwisko`, `imie`, `email`, `password`) VALUES (NULL, '$nazwisko','$imie','$email','$haslo2');";
-if ($pol->query($sql2)) echo "Wszystko ok";
-else {
+$pol->close();
 
+///dodanie administratora do tabeli USERS
+$pol2 = new mysqli("$db_host", "$db_username", "$db_password", "$db_name");
+$sql2 = "INSERT INTO `users` (`usersId`, `usersName`, `usersSurname`, `usersEmail`, `usersLogin`, `usersPassword`, `usersRole`) VALUES (NULL, '$imie', '$nazwisko', '$email', '$login', '$haslo2', '2');";
+if ($pol2->query($sql2) == false) {
     header('Location: index.php');
     $_SESSION['error'] = "Błąd połączenia z bazą danych! Brak uprawnień: <b>Insert_priv</b>.";
-    $pol->close();
+    $pol2->close();
     exit();
 };
-
-$pol->close();
+$pol2->close();
 
 ///zapis credentials do bazy
 $to_store = '<?php
 define("DB_HOST","' . $db_host . '");
 define("DB_USER","' . $db_username . '");
-define("DB_PASSWORD","' . $db_password . '");
+define("DB_PASS","' . $db_password . '");
 define("DB_NAME","' . $db_name . '");
+require_once "app/app.php";
+require_once "app/controller.php";
 ?>';
 
-$url = dirname(__FILE__, 2) . '/config.php';
+$url = '../config.php';
+touch($url);
 $plik = file_put_contents("$url", "$to_store");
-if($plik === false)
-{
-    header('Location: index.php');
-    $_SESSION['error'] = "<b>Błąd: </b>Brak uprawnień do zapisu plików";
-    ob_end_flush();
-}
 
 ///koniec sesji
 session_unset();
 session_destroy();
-?>
