@@ -64,6 +64,7 @@ class Login extends Controller
         $_SESSION['usersId'] = $user->usersId;
         $_SESSION['usersName'] = $user->usersName;
         $_SESSION['usersSurname'] = $user->usersSurname;
+        $_SESSION['usersRole'] = $user->usersRole;
         redirect('/dashboard');
     }
 

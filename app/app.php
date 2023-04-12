@@ -6,7 +6,8 @@ class App
         '/home',
         '/login',
         '/dashboard',
-        '/profile'
+        '/profile',
+        '/oceny'
     ];
     protected $controller = 'home';
     protected $method = 'index';

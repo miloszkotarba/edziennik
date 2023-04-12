@@ -1,0 +1,136 @@
+ul {
+    list-style: none;
+}
+
+.links-box {
+    background: #fff;
+    padding: 15px 25px;
+    padding-bottom: 0;
+    border: 0.9px solid #777;
+    border-radius: 6px;
+    width: 85%;
+    margin: auto;
+}
+
+.links-box .header h2 {
+    margin-bottom: 0.2rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+#page-title {
+    display: flex;
+    align-items: center;
+}
+
+#page-title i {
+    font-size: 2.6rem;
+    margin-right: 0.6rem;
+    color: rgb(19, 122, 19);
+}
+
+#page-title span {
+    font-weight: 400;
+    font-size: 1.4rem;
+}
+
+.links-box .content {
+    margin-bottom: 2.2rem;
+    position: relative;
+}
+
+.links-box .content::after {
+    content: '';
+    height: 1px;
+    width: 100%;
+    bottom: -1.4rem;
+    border-radius: 5px;
+    left: 0;
+    background: silver;
+    opacity: 0.9;
+    position: absolute;
+}
+
+.links-box .content:last-child::after {
+    display: none;
+}
+
+.links-box .content a {
+    color: rgba(37, 60, 120, 0.99);
+    text-decoration: none;
+    display: inline;
+}
+
+.links-box .content a:hover {
+    text-decoration: underline;
+}
+
+@media only screen and (max-width: 400px) {
+    .links-box {
+        width: 95%;
+    }
+}
+
+.category-form {
+    width: 85%;
+    margin: auto;
+    padding: 35px 30px;
+    border: 0.9px solid #777;
+    border-radius: 6px;
+    background: #fff;
+}
+
+.category-form form {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    width: 100%;
+}
+
+.category-form form input[type="text"] {
+    font-size: 1.2rem;
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid darkgrey;
+    margin-top: 0.2rem;
+    margin-bottom: 1rem;
+}
+
+.category-form input[type="radio"] {
+    cursor: pointer;
+}
+
+.category-form form p, .category-form form label {
+    font-size: 1.1rem;
+    margin-bottom: 0.1rem;
+    font-weight: 400;
+}
+
+.category-form form select {
+    margin-bottom: 0.5rem;
+    margin-top: 0.3rem;
+}
+
+.category-form form select {
+    font-size: 1.2rem;
+    padding: 6px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.category-form input[type="submit"] {
+    background: rgba(39, 65, 132, 0.99);
+    color: #fff;
+    border: none;
+    padding: 12px 0px;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+    margin-top: 1rem;
+    border-radius: 6px;
+    transition: all .3s ease-in-out;
+}
+
+.category-form input[type="submit"]:hover {
+    background: rgba(42, 70, 142, 0.99);
+    cursor: pointer;
+}

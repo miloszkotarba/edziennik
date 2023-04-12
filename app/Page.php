@@ -62,7 +62,7 @@ class Page
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="/oceny">
                         <i class="las la-graduation-cap"></i>
                         <span>Oceny</span>
                     </a>
