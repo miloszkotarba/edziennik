@@ -39,7 +39,7 @@ class Page
         ?>
         <header>
         <div class="left">
-            <h2>Edziennik</h2>
+            <h2><a href="/dashboard" style="text-decoration: none; color: black;">Edziennik</a></h2>
         </div>
         <div class="right">
             <span>Witaj, <?php if (isset($_SESSION['usersId'])) echo $_SESSION['usersName'] . " " . $_SESSION['usersSurname']; ?></span>

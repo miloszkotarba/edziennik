@@ -12,7 +12,7 @@ class Category
     }
 
     //Find Category by Name and UserId
-    public function findCategoryByName($teacherId,$name)
+    public function findCategoryByName($teacherId, $name)
     {
         $this->db->query('SELECT * FROM categories WHERE teacherId = :teacherId AND name = :name');
         $this->db->bind(':teacherId', $teacherId);
@@ -27,17 +27,31 @@ class Category
         }
     }
 
-    //Login - check password
-    /*public function login($login, $password)
+    public function insertCategory($name, $weight, $color, $averageCount, $teacherId)
     {
-        $row = $this->findUserByLogin($login);
-        if ($row == false) return false;
+        $this->db->query('INSERT INTO categories VALUES(NULL,:name,:weight,:color,:averageCount,:teacherId)');
+        $this->db->bind(':name', $name);
+        $this->db->bind(':weight', $weight);
+        $this->db->bind(':color', $color);
+        $this->db->bind(':averageCount', $averageCount);
+        $this->db->bind(':teacherId', $teacherId);
 
-        $hashedPassword = $row->usersPassword;
-        if (password_verify($password, $hashedPassword)) {
+        $final = $this->db->execute();
+        if ($final) return true;
+        else return false;
+    }
+
+    public function showAllCategories($teacherId)
+    {
+        $this->db->query('SELECT categoryId, name, CONCAT("#",color) color FROM categories WHERE teacherId = :teacherId ORDER BY name;');
+        $this->db->bind(':teacherId', $teacherId);
+
+        $row = $this->db->resultSet();
+
+        if ($this->db->rowCount() > 0) {
             return $row;
         } else {
             return false;
         }
-    }*/
+    }
 }

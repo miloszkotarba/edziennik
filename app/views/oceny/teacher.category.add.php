@@ -1,5 +1,7 @@
 <?php
 require 'app/Page.php';
+require_once 'app/alerts.php';
+
 
 Page::displayHeader("e-Dziennik Nowa kategoria", "oceny.css");
 Page::displayNavigation();
@@ -18,11 +20,11 @@ Page::displayNavigation();
             <form action="/oceny/dodaj_kategorie" method="post">
                 <label for="categoryName">Nazwa</label>
                 <input type="text" name="categoryName">
-                <label for="categoryWeight">Waga</label>
-                <input type="text" name="categoryWeight">
                 <p>Licz do średniej:</p>
-                <label style="display: flex; align-items: center"><input type="radio" name="categoryAverage" value="yes" checked>&nbsp;Tak <i style="color: green; font-size: 1.3rem; margin-left: 0.2rem; -webkit-text-stroke: 1px green;" class="las la-check"></i></label>
-                <label style="display: flex; align-items: center"><input type="radio" name="categoryAverage" value="no">&nbsp;Nie <i style="color: crimson; font-size: 1.3rem; margin-left: 0.2rem; -webkit-text-stroke: 1px crimson;" class="las la-times"></i></label>
+                <label style="display: flex; align-items: center"><input type="radio" name="categoryAverage" value="yes" id="yes" onclick="ShowHideDiv()">&nbsp;Tak <i style="color: green; font-size: 1.3rem; margin-left: 0.2rem; -webkit-text-stroke: 1px green;" class="las la-check"></i></label>
+                <label style="display: flex; align-items: center"><input type="radio" name="categoryAverage" value="no"  id="no" onclick="ShowHideDiv()" checked>&nbsp;Nie <i style="color: crimson; font-size: 1.3rem; margin-left: 0.2rem; -webkit-text-stroke: 1px crimson;" class="las la-times"></i></label>
+                <label style="margin-top: 1rem;" for="categoryWeight" class="categoryWeight">Waga</label>
+                <input type="text" name="categoryWeight" class="categoryWeight">
                 <p style="margin-top: 1rem">Motyw</p>
                 <select name="categoryTheme">
                     <option value="F0E68C" style="color: black; background-color: #F0E68C;">&nbsp;khaki&nbsp;</option>
@@ -80,6 +82,16 @@ Page::displayNavigation();
                 <input type="submit" value="Dodaj">
             </form>
         </div>
+        <?php alerts::flashMessages() ?>
+        <script>
+            function ShowHideDiv() {
+                var chkYes = document.getElementById("yes");
+                var categoryWeight = document.querySelectorAll('.categoryWeight');
+                categoryWeight.forEach(element => {
+                    element.style.display = chkYes.checked ? "block" : "none";
+                })
+            }
+        </script>
     </main>
 <?php
 Page::displayFooter();

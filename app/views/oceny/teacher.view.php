@@ -1,5 +1,6 @@
 <?php
 require 'app/Page.php';
+require_once 'app/alerts.php';
 
 Page::displayHeader("e-Dziennik Oceny", "oceny.css");
 Page::displayNavigation();
@@ -30,10 +31,11 @@ Page::displayNavigation();
             <div class="content">
                 <ul>
                     <li><a href="/oceny/kategorie/dodaj">Dodawanie kategorii</a></li>
-                    <li><a href="/oceny/kategorie/modyfikuj">Modyfikacja kategorii</a></li>
+                    <li><a href="/oceny/kategorie/lista">Modyfikacja kategorii</a></li>
                 </ul>
             </div>
         </div>
+        <?php alerts::flashMessages() ?>
     </main>
 <?php
 Page::displayFooter();
