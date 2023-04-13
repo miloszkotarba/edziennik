@@ -15,7 +15,7 @@ Page::displayNavigation();
         </div>
         <div style="margin-bottom: 1rem"></div>
         <div class="category-form">
-            <form action="/oceny/dodaj_kategorie" method="POST">
+            <form action="/oceny/dodaj_kategorie" method="post">
                 <label for="categoryName">Nazwa</label>
                 <input type="text" name="categoryName">
                 <label for="categoryWeight">Waga</label>
