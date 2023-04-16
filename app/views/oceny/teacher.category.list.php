@@ -46,8 +46,8 @@ Page::displayNavigation();
                     echo '<div class="color" style="background: ' . $item->color . ';"></div>';
                     echo '<span>' . $item->name . '</span>';
                     echo '<div class="buttons">';
-                    echo ' <a href="#"><i class="las la-edit"></i>Edytuj</a>';
-                    echo ' <a href="#"><i class="las la-trash"></i>Usuń</a>';
+                    echo ' <a href="/oceny/kategorie/edytuj/'.$item->categoryId.'"><i class="las la-edit"></i>Edytuj</a>';
+                    echo ' <a href="/oceny/usun_kategorie/'.$item->categoryId.'"><i class="las la-trash"></i>Usuń</a>';
                     echo '</div>
         </div>';
                     $licznik2++;

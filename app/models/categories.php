@@ -54,4 +54,44 @@ class Category
             return false;
         }
     }
+
+    public function showCategory($categoryId)
+    {
+        $this->db->query('SELECT * FROM categories WHERE categoryId = :categoryId;');
+        $this->db->bind(':categoryId', $categoryId);
+
+        $row = $this->db->single();
+
+        if ($this->db->rowCount() > 0) {
+            return $row;
+        } else {
+            return false;
+        }
+    }
+
+    public function checkCategoryOwner($teacherId, $categoryId)
+    {
+        $this->db->query('SELECT * FROM categories WHERE teacherId = :teacherId AND categoryId = :categoryId');
+        $this->db->bind(':teacherId', $teacherId);
+        $this->db->bind(':categoryId', $categoryId);
+
+        $row = $this->db->single();
+
+        if ($this->db->rowCount() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function deleteCategory($categoryId)
+    {
+        $this->db->query('DELETE FROM categories WHERE categoryId = :categoryId');
+        $this->db->bind(':categoryId', $categoryId);
+
+        $final = $this->db->execute();
+        if ($final) return true;
+        else return false;
+    }
+
 }

@@ -41,7 +41,7 @@ class Oceny extends Controller
         require 'views/oceny/teacher.view.php';
     }
 
-    public function kategorie($link = NULL)
+    public function kategorie($link = NULL, $link2 = NULL)
     {
         if ($link == NULL) {
             header('Location: /oceny');
@@ -58,6 +58,18 @@ class Oceny extends Controller
                 $id_user = $_SESSION['usersId'];
                 $row = $this->Model->showAllCategories($id_user);
                 require 'views/oceny/teacher.category.list.php';
+                break;
+            case "edytuj":
+                $id_user = $_SESSION['usersId'];
+                if (!$this->Model->checkCategoryOwner($id_user, $link2)) {
+                    redirect('/oceny/kategorie/lista');
+                }
+                $result = $this->Model->showCategory($link2);
+                if (!$result) {
+                    alerts::SetError("Nastąpił błąd.", 0);
+                    redirect('/oceny/kategorie/lista');
+                }
+                require 'views/oceny/teacher.category.edit.php';
                 break;
             default:
                 header('Location: /blad');
@@ -112,9 +124,9 @@ class Oceny extends Controller
             redirect('/oceny/kategorie/dodaj');
         }
 
-        $categoryallowed = array("F0E68C", "87CEFA","B0C4DE","F0F8FF","F0FFFF","F5F5DC","FFEBCD","FFF8DC","A9A9A9","BDB76B","7FBC8F","DCDCDC","DAA520","E6E6FA","FFA07A","32CD32","66CDAA","C0C0C0","D2B48C","3333FF","7B68EE","BA55D3","FFB6C1","FF1493","DC143C","FF0000","FF8C00","FFD700","ADFF2F","7CFC00");
+        $categoryallowed = array("F0E68C", "87CEFA", "B0C4DE", "F0F8FF", "F0FFFF", "F5F5DC", "FFEBCD", "FFF8DC", "A9A9A9", "BDB76B", "7FBC8F", "DCDCDC", "DAA520", "E6E6FA", "FFA07A", "32CD32", "66CDAA", "C0C0C0", "D2B48C", "3333FF", "7B68EE", "BA55D3", "FFB6C1", "FF1493", "DC143C", "FF0000", "FF8C00", "FFD700", "ADFF2F", "7CFC00");
 
-        if(!in_array($data['categoryTheme'],$categoryallowed)) {
+        if (!in_array($data['categoryTheme'], $categoryallowed)) {
             alerts::SetError("Podano niepoprawny kolor.", 0);
             redirect('/oceny/kategorie/dodaj');
         }
@@ -127,12 +139,31 @@ class Oceny extends Controller
             $id_usera = $_SESSION['usersId'];
             $final = $this->Model->insertCategory($data["categoryName"], $data['categoryWeight'], $data['categoryTheme'], $data['categoryAverage'], $id_usera);
             if ($final) {
-                alerts::SetSuccess("Poprawnie dodano kategorię.");
+                alerts::SetSuccess("Dodano kategorię.");
                 header('Location: /oceny');
-            }
-            else {
+            } else {
                 alerts::SetError("Nastąpił błąd. Nie dodano kategorii.", 0);
                 redirect('/oceny/kategorie/dodaj');
+            }
+        }
+    }
+
+    public function usun_kategorie($link = NULL)
+    {
+        $this->is_teacher();
+        if ($link == NULL) redirect('/oceny/kategorie/lista');
+        $id_user = $_SESSION['usersId'];
+        if (!$this->Model->checkCategoryOwner($id_user, $link)) {
+            alerts::SetError("Nastąpił błąd. Nie usunięto kategorii.");
+            redirect('/oceny/kategorie/lista');
+        } else {
+            $final = $this->Model->deleteCategory($link);
+            if ($final) {
+                alerts::SetSuccess("Usunięto kategorię.");
+                header('Location: /oceny/kategorie/lista');
+            } else {
+                alerts::SetError("Nastąpił błąd. Nie usunięto kategorii.");
+                redirect('/oceny/kategorie/lista');
             }
         }
     }
