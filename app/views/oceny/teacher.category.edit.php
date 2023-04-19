@@ -159,7 +159,7 @@ Page::displayNavigation();
                         &nbsp;lawngreen&nbsp;
                     </option>
                 </select>
-                <input type="submit" value="Dodaj">
+                <input type="submit" value="Zmień">
                 <input type="hidden" value="<?= $result->categoryId; ?>" name="categoryId">
             </form>
         </div>
