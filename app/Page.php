@@ -74,7 +74,7 @@ class Page
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="/ogloszenia">
                         <i class="las la-scroll"></i>
                         <span class="nav-item">Ogłoszenia</span>
                     </a>

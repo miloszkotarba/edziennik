@@ -148,6 +148,81 @@ class Oceny extends Controller
         }
     }
 
+    public function modyfikuj_kategorie()
+    {
+        $this->is_teacher();
+
+        //Sanitize POST data
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+        //Init data
+        $data = [
+            'categoryName' => trim($_POST['categoryName']),
+            'categoryWeight' => trim($_POST['categoryWeight']),
+            'categoryAverage' => trim($_POST['categoryAverage']),
+            'categoryTheme' => trim($_POST['categoryTheme']),
+            'categoryId' => trim($_POST['categoryId'])
+        ];
+
+        //Validate inputs
+        if (empty($data['categoryId'])) {
+            alerts::SetError("Błąd: Nie zmieniono kategorii.", 0);
+            redirect('/oceny/kategorie/lista');
+        }
+
+        $id_usera = $_SESSION['usersId'];
+        if ($this->Model->checkCategoryOwner($id_usera, $data['categoryId']) == false) {
+            alerts::SetError("Błąd: Nie zmieniono kategorii.", 0);
+            redirect('/oceny/kategorie/lista');
+        }
+
+        if (empty($data['categoryName']) || empty($data['categoryAverage']) || empty($data['categoryTheme'])) {
+            alerts::SetError("Uzupełnij wszystkie pola.", 0);
+            redirect('/oceny/kategorie/lista');
+        }
+
+        if (strlen($data['categoryName']) > 50) {
+            alerts::SetError("Nazwa kategorii przekracza limit 50 znaków.", 0);
+            redirect('/oceny/kategorie/lista');
+        }
+
+        if ($data['categoryAverage'] === "yes") {
+            $data['categoryAverage'] = 1;
+        } else if ($data['categoryAverage'] === "no") {
+            $data['categoryAverage'] = 0;
+            $data['categoryWeight'] = 0;
+        } else {
+            alerts::SetError("Błąd. Spróbuj ponownie.", 0);
+            redirect('/oceny/kategorie/lista');
+        }
+
+        if (!ctype_digit(strval($data['categoryWeight']))) {
+            alerts::SetError("Waga musi być liczbą.", 0);
+            redirect('/oceny/kategorie/lista');
+        }
+
+        if ($data['categoryWeight'] > 10 || $data['categoryWeight'] < 0) {
+            alerts::SetError("Waga musi być liczbą z przedziału < 0, 10 >.", 0);
+            redirect('/oceny/kategorie/lista');
+        }
+
+        $categoryallowed = array("F0E68C", "87CEFA", "B0C4DE", "F0F8FF", "F0FFFF", "F5F5DC", "FFEBCD", "FFF8DC", "A9A9A9", "BDB76B", "7FBC8F", "DCDCDC", "DAA520", "E6E6FA", "FFA07A", "32CD32", "66CDAA", "C0C0C0", "D2B48C", "3333FF", "7B68EE", "BA55D3", "FFB6C1", "FF1493", "DC143C", "FF0000", "FF8C00", "FFD700", "ADFF2F", "7CFC00");
+
+        if (!in_array($data['categoryTheme'], $categoryallowed)) {
+            alerts::SetError("Podano niepoprawny kolor.", 0);
+            redirect('/oceny/kategorie/lista');
+        }
+
+        $final = $this->Model->modifyCategory($data['categoryName'], $data['categoryWeight'], $data['categoryTheme'], $data['categoryAverage'], $data['categoryId']);
+        if ($final) {
+            alerts::SetSuccess("Zmieniono kategorię.");
+            header('Location: /oceny/kategorie/lista');
+        } else {
+            alerts::SetError("Błąd: Nie zmieniono kategorii.", 0);
+            redirect('/oceny/kategorie/lista');
+        }
+    }
+
     public function usun_kategorie($link = NULL)
     {
         $this->is_teacher();

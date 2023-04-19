@@ -41,6 +41,20 @@ class Category
         else return false;
     }
 
+    public function modifyCategory($name, $weight, $color, $averageCount, $categoryId)
+    {
+        $this->db->query('UPDATE categories SET name = :name, weight = :weight, color = :color, averageCount = :averageCount WHERE categoryId = :categoryId');
+        $this->db->bind(':name', $name);
+        $this->db->bind(':weight', $weight);
+        $this->db->bind(':color', $color);
+        $this->db->bind(':averageCount', $averageCount);
+        $this->db->bind(':categoryId', $categoryId);
+
+        $final = $this->db->execute();
+        if ($final) return true;
+        else return false;
+    }
+
     public function showAllCategories($teacherId)
     {
         $this->db->query('SELECT categoryId, name, CONCAT("#",color) color FROM categories WHERE teacherId = :teacherId ORDER BY name;');

@@ -38,59 +38,129 @@ Page::displayNavigation();
                 <input type="text" name="categoryWeight" class="categoryWeight" value="<?= $result->weight ?>">
                 <p style="margin-top: 1rem">Motyw</p>
                 <select name="categoryTheme" id="categoryTheme">
-                    <option value="F0E68C" style="color: black; background-color: #F0E68C;">&nbsp;khaki&nbsp;</option>
-                    <option value="87CEFA" style="color: black; background-color: #87CEFA;">&nbsp;lightskyblue&nbsp;
+                    <option value="F0E68C"
+                            style="color: black; background-color: #F0E68C;" <?php if ($result->color == "F0E68C") echo "selected"; ?>>
+                        &nbsp;khaki&nbsp;
                     </option>
-                    <option value="B0C4DE" style="color: black; background-color: #B0C4DE;">&nbsp;lightsteelblue&nbsp;
+                    <option value="87CEFA"
+                            style="color: black; background-color: #87CEFA;" <?php if ($result->color == "87CEFA") echo "selected"; ?>>
+                        &nbsp;lightskyblue&nbsp;
                     </option>
-                    <option value="F0F8FF" style="color: black; background-color: #F0F8FF;">&nbsp;aliceblue&nbsp;
+                    <option value="B0C4DE"
+                            style="color: black; background-color: #B0C4DE;" <?php if ($result->color == "87CEFA") echo "selected"; ?>>
+                        &nbsp;lightsteelblue&nbsp;
                     </option>
-                    <option value="F0FFFF" style="color: black; background-color: #F0FFFF;">&nbsp;azure&nbsp;</option>
-                    <option value="F5F5DC" style="color: black; background-color: #F5F5DC;">&nbsp;beige&nbsp;</option>
-                    <option value="FFEBCD" style="color: black; background-color: #FFEBCD;">&nbsp;blanchedalmond&nbsp;
+                    <option value="F0F8FF"
+                            style="color: black; background-color: #F0F8FF;" <?php if ($result->color == "FOF8FF") echo "selected"; ?>>
+                        &nbsp;aliceblue&nbsp;
                     </option>
-                    <option value="FFF8DC" style="color: black; background-color: #FFF8DC;">&nbsp;cornsilk&nbsp;
+                    <option value="F0FFFF"
+                            style="color: black; background-color: #F0FFFF;" <?php if ($result->color == "F0FFFF") echo "selected"; ?>>
+                        &nbsp;azure&nbsp;
                     </option>
-                    <option value="A9A9A9" style="color: black; background-color: #A9A9A9;">&nbsp;darkgray&nbsp;
+                    <option value="F5F5DC"
+                            style="color: black; background-color: #F5F5DC;" <?php if ($result->color == "F5F5DC") echo "selected"; ?>>
+                        &nbsp;beige&nbsp;
                     </option>
-                    <option value="BDB76B" style="color: black; background-color: #BDB76B;">&nbsp;darkkhaki&nbsp;
+                    <option value="FFEBCD"
+                            style="color: black; background-color: #FFEBCD;" <?php if ($result->color == "FFEBCD") echo "selected"; ?>>
+                        &nbsp;blanchedalmond&nbsp;
                     </option>
-                    <option value="8FBC8F" style="color: black; background-color: #8FBC8F;">&nbsp;darkseagreen&nbsp;
+                    <option value="FFF8DC"
+                            style="color: black; background-color: #FFF8DC;" <?php if ($result->color == "FFF8DC") echo "selected"; ?>>
+                        &nbsp;cornsilk&nbsp;
                     </option>
-                    <option value="DCDCDC" style="color: black; background-color: #DCDCDC;">&nbsp;gainsboro&nbsp;
+                    <option value="A9A9A9"
+                            style="color: black; background-color: #A9A9A9;" <?php if ($result->color == "A9A9A9") echo "selected"; ?>>
+                        &nbsp;darkgray&nbsp;
                     </option>
-                    <option value="DAA520" style="color: black; background-color: #DAA520;">&nbsp;goldenrod&nbsp;
+                    <option value="BDB76B"
+                            style="color: black; background-color: #BDB76B;" <?php if ($result->color == "BDB76B") echo "selected"; ?>>
+                        &nbsp;darkkhaki&nbsp;
                     </option>
-                    <option value="E6E6FA" style="color: black; background-color: #E6E6FA;">&nbsp;lavender&nbsp;
+                    <option value="8FBC8F"
+                            style="color: black; background-color: #8FBC8F;" <?php if ($result->color == "8FBC8F") echo "selected"; ?>>
+                        &nbsp;darkseagreen&nbsp;
                     </option>
-                    <option value="FFA07A" style="color: black; background-color: #FFA07A;">&nbsp;lightsalmon&nbsp;
+                    <option value="DCDCDC"
+                            style="color: black; background-color: #DCDCDC;" <?php if ($result->color == "DCDCDC") echo "selected"; ?>>
+                        &nbsp;gainsboro&nbsp;
                     </option>
-                    <option value="32CD32" style="color: black; background-color: #32CD32;">&nbsp;limegreen&nbsp;
+                    <option value="DAA520"
+                            style="color: black; background-color: #DAA520;" <?php if ($result->color == "DAA520") echo "selected"; ?>>
+                        &nbsp;goldenrod&nbsp;
                     </option>
-                    <option value="66CDAA" style="color: black; background-color: #66CDAA;">&nbsp;mediummaquamarine&nbsp;</option>
-                    <option value="C0C0C0" style="color: black; background-color: #C0C0C0;">&nbsp;silver&nbsp;</option>
-                    <option value="D2B48C" style="color: black; background-color: #D2B48C;">&nbsp;tan&nbsp;</option>
-                    <option value="3333FF" style="color: black; background-color: #3333FF;">&nbsp;blue&nbsp;</option>
-                    <option value="7B68EE" style="color: black; background-color: #7B68EE;">
+                    <option value="E6E6FA"
+                            style="color: black; background-color: #E6E6FA;" <?php if ($result->color == "E6E6FA") echo "selected"; ?>>
+                        &nbsp;lavender&nbsp;
+                    </option>
+                    <option value="FFA07A"
+                            style="color: black; background-color: #FFA07A;" <?php if ($result->color == "FFA07A") echo "selected"; ?>>
+                        &nbsp;lightsalmon&nbsp;
+                    </option>
+                    <option value="32CD32"
+                            style="color: black; background-color: #32CD32;" <?php if ($result->color == "32CD32") echo "selected"; ?>>
+                        &nbsp;limegreen&nbsp;
+                    </option>
+                    <option value="66CDAA"
+                            style="color: black; background-color: #66CDAA;" <?php if ($result->color == "66CDAA") echo "selected"; ?>>
+                        &nbsp;mediummaquamarine&nbsp;
+                    </option>
+                    <option value="C0C0C0"
+                            style="color: black; background-color: #C0C0C0;" <?php if ($result->color == "C0C0C0") echo "selected"; ?>>
+                        &nbsp;silver&nbsp;
+                    </option>
+                    <option value="D2B48C"
+                            style="color: black; background-color: #D2B48C;" <?php if ($result->color == "D2B48C") echo "selected"; ?>>
+                        &nbsp;tan&nbsp;
+                    </option>
+                    <option value="3333FF"
+                            style="color: black; background-color: #3333FF;" <?php if ($result->color == "3333FF") echo "selected"; ?>>
+                        &nbsp;blue&nbsp;
+                    </option>
+                    <option value="7B68EE"
+                            style="color: black; background-color: #7B68EE;" <?php if ($result->color == "7B68EE") echo "selected"; ?>>
                         &nbsp;mediumslateblue&nbsp;
                     </option>
-                    <option value="BA55D3" style="color: black; background-color: #BA55D3;">&nbsp;mediumorchid&nbsp;
+                    <option value="7B68EE"
+                            style="color: black; background-color: #BA55D3;" <?php if ($result->color == "7B68EE") echo "selected"; ?>>
+                        &nbsp;mediumorchid&nbsp;
                     </option>
-                    <option value="FFB6C1" style="color: black; background-color: #FFB6C1;">&nbsp;lightpink&nbsp;
+                    <option value="FFB6C1"
+                            style="color: black; background-color: #FFB6C1;" <?php if ($result->color == "FFB6C1") echo "selected"; ?>>
+                        &nbsp;lightpink&nbsp;
                     </option>
-                    <option value="FF1493" style="color: black; background-color: #FF1493;">&nbsp;deeppink&nbsp;
+                    <option value="FF1493"
+                            style="color: black; background-color: #FF1493;" <?php if ($result->color == "FF1493") echo "selected"; ?>>
+                        &nbsp;deeppink&nbsp;
                     </option>
-                    <option value="DC143C" style="color: black; background-color: #DC143C;">&nbsp;crimson&nbsp;</option>
-                    <option value="FF0000" style="color: black; background-color: #FF0000;">&nbsp;red&nbsp;</option>
-                    <option value="FF8C00" style="color: black; background-color: #FF8C00;">&nbsp;darkorange&nbsp;
+                    <option value="DC143C"
+                            style="color: black; background-color: #DC143C;" <?php if ($result->color == "DC143C") echo "selected"; ?>>
+                        &nbsp;crimson&nbsp;
                     </option>
-                    <option value="FFD700" style="color: black; background-color: #FFD700;">&nbsp;gold&nbsp;</option>
-                    <option value="ADFF2F" style="color: black; background-color: #ADFF2F;">&nbsp;greenyellow&nbsp;
+                    <option value="FF0000"
+                            style="color: black; background-color: #FF0000;" <?php if ($result->color == "FF0000") echo "selected"; ?>>
+                        &nbsp;red&nbsp;
                     </option>
-                    <option value="7CFC00" style="color: black; background-color: #7CFC00;">&nbsp;lawngreen&nbsp;
+                    <option value="FF8C00"
+                            style="color: black; background-color: #FF8C00;" <?php if ($result->color == "FF8C00") echo "selected"; ?>>
+                        &nbsp;darkorange&nbsp;
+                    </option>
+                    <option value="FFD700"
+                            style="color: black; background-color: #FFD700;" <?php if ($result->color == "FFD700") echo "selected"; ?>>
+                        &nbsp;gold&nbsp;
+                    </option>
+                    <option value="ADFF2F"
+                            style="color: black; background-color: #ADFF2F;" <?php if ($result->color == "ADFF2F") echo "selected"; ?>>
+                        &nbsp;greenyellow&nbsp;
+                    </option>
+                    <option value="7CFC00"
+                            style="color: black; background-color: #7CFC00;" <?php if ($result->color == "7CFC00") echo "selected"; ?>>
+                        &nbsp;lawngreen&nbsp;
                     </option>
                 </select>
                 <input type="submit" value="Dodaj">
+                <input type="hidden" value="<?= $result->categoryId; ?>" name="categoryId">
             </form>
         </div>
         <?php alerts::flashMessages() ?>
@@ -102,17 +172,6 @@ Page::displayNavigation();
                     element.style.display = chkYes.checked ? "block" : "none";
                 })
             }
-
-                const changeSelected = () => {
-                    const text = 'crimson';
-                    const select = document.querySelector('#categoryTheme');
-                    const options = Array.from(select.options);
-                    const optionToSelect = options.find(item => item.text === text);
-                    console.log(optionToSelect)
-                    optionToSelect.selected = true;
-                };
-
-            changeSelected();
         </script>
         <?php
         if ($result->weight != 0) echo "<script>ShowHideDiv()</script>";
