@@ -57,6 +57,84 @@ class Ogloszenia extends Controller
             exit();
         }
     }
-}
 
-?>
+    public function dodaj()
+    {
+        $this->is_teacher();
+        require 'views/ogloszenia/teacher.add.php';
+    }
+
+    public function add()
+    {
+        $this->is_teacher();
+
+        //Sanitize POST data
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+        //Init data
+        $data = [
+            'title' => trim($_POST['Title']),
+            'content' => trim($_POST['Content'])
+        ];
+
+        //Validate inputs
+        if (empty($data['title']) || empty($data['content'])) {
+            alerts::SetError("Uzupełnij wszystkie pola.", 0);
+            redirect('/ogloszenia/dodaj');
+        }
+
+        if (strlen($data['title']) > 100) {
+            alerts::SetError("Tytuł nie może być dłuższy niż 100 znaków.", 0);
+            redirect('/ogloszenia/dodaj');
+        }
+
+        if (strlen($data['title']) < 6) {
+            alerts::SetError("Tytuł nie może być krótszy niż 6 znaków.", 0);
+            redirect('/ogloszenia/dodaj');
+        }
+
+        if (strlen($data['title']) > 100) {
+            alerts::SetError("Tytuł nie może być dłuższy niż 100 znaków.", 0);
+            redirect('/ogloszenia/dodaj');
+        }
+
+        if (strlen($data['title']) > 6000) {
+            alerts::SetError("Ogłoszenie nie może być dłuższe niż 6000 znaków.", 0);
+            redirect('/ogloszenia/dodaj');
+        }
+
+        $data['title'] = htmlspecialchars($data['title']);
+        $data['content'] = htmlspecialchars($data['content']);
+
+        $user_id = $_SESSION['usersId'];
+
+        $final = $this->Model->insertAnnouncement($data['title'], $data['content'], $user_id);
+        if (!$final) {
+            alerts::SetError("Błąd. Nie dodano ogłoszenia", 0);
+            redirect('/ogloszenia/dodaj');
+        } else {
+            alerts::SetSuccess("Dodano ogłoszenie");
+            header('Location: /ogloszenia/lista');
+        }
+    }
+
+    public function usun($link = NULL) {
+        $this->is_teacher();
+        if ($link == NULL) redirect('/ogloszenia/lista');
+        $id_user = $_SESSION['usersId'];
+        if (!$this->Model->checkAnnouncementOwner($id_user, $link)) {
+            alerts::SetError("Nastąpił błąd. Nie usunięto ogłoszenia.");
+            redirect('/ogloszenia/lista');
+        } else {
+            $final = $this->Model->deleteAnnouncement($link);
+            if ($final) {
+                alerts::SetSuccess("Usunięto ogłoszenie.");
+                header('Location: /ogloszenia/lista');
+            } else {
+                alerts::SetError("Nastąpił błąd. Nie usunięto ogłoszenia.");
+                redirect('/ogloszenia/lista');
+            }
+        }
+    }
+
+}

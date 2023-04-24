@@ -56,6 +56,52 @@
     line-height: 27.2px;
 }
 
+.broadcast {
+    position: relative;
+}
+
+.broadcast .button {
+    position: absolute;
+    top: 15px;
+    right: 10px;
+}
+
+.broadcast .button a {
+    color: crimson;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border: 1px solid crimson;
+    border-radius: 5px;
+}
+
+.broadcast .button a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: row-reverse;
+}
+
+.broadcast .button a i {
+    font-size: 1.25rem;
+    margin-right: 2px;
+}
+
+.broadcast .button a{
+    color: crimson;
+    padding: 5px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-right: 7px;
+    font-weight: 300;
+    font-size: 1.05rem;
+}
+
+.list-box .row .category-box .buttons a:nth-child(2) {
+    border: 1px solid crimson;
+    color: crimson;
+}
+
 @media only screen and (max-width: 990px){
     .broadcast {
         width: 95%;

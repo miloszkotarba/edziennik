@@ -25,15 +25,20 @@ Page::displayNavigation();
                 <span>Brak ogłoszeń</span>
                 <span class="description">Nie dodano jeszcze żadnego ogłoszenia.</span>
             END;
-                    if($teacher) echo '<a href="/ogloszenia/dodaj">Dodaj ogłoszenie</a>';
+                    if ($teacher) echo '<a href="/ogloszenia/dodaj">Dodaj ogłoszenie</a>';
                     echo '</div>';
-                }else {
+                } else {
                     foreach ($result as $item) {
                         echo <<< END
                         <div class="broadcast">
                     <div class="title">
                         <span>$item->title</span>
                     </div>
+                    END;
+                        if ($item->teacherId === $_SESSION['usersId']) {
+                            echo '<div class="button"><a href="/ogloszenia/usun/'.$item->announcementId.'">Usuń<i class="las la-trash"></i></a></div>';
+                        }
+                        echo <<< END
                     <div class="person">
                         <img src="/img/no-avatar.png" alt="Profile picture">
                         <div class="name">

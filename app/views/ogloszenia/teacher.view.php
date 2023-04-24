@@ -21,7 +21,7 @@ Page::displayNavigation();
             </div>
             <div class="content">
                 <ul>
-                    <li><a href="#">Dodawanie i modyfikacja ogłoszeń</a></li>
+                    <li><a href="/ogloszenia/dodaj">Dodawanie i modyfikacja ogłoszeń</a></li>
                     <li><a href="/ogloszenia/lista">Przeglądanie ogłoszeń</a></li>
                 </ul>
             </div>
