@@ -16,6 +16,8 @@ Page::displayNavigation();
         </div>
         <div style="margin-bottom: 1rem"></div>
         <div class="links-box">
+            <?php if($result)
+                echo <<< END
             <div class="box">
                 <a href="teacher/add" style="color: #fff; text-decoration: none">
                     <div class="btn">
@@ -24,10 +26,10 @@ Page::displayNavigation();
                             <span>Dodaj nauczyciela</span>
                         </div>
                 </a>
-            </div
+            </div>
             </a>
         </div>
-        <?php
+        END;
         if ($result) {
             echo <<< END
                     <table>
@@ -68,7 +70,17 @@ Page::displayNavigation();
             </tbody>
             </table>
             END;
-        } ?>
+        } else {
+            echo <<< END
+                <div class="empty-set">
+                <i class="las la-user-times"></i>
+                <span>Brak nauczycieli</span>
+                <span class="description">Nie dodano jeszcze żadnego nauczyciela.</span>
+                <a href="/teacher/add">Dodaj nauczyciela</a>
+            </div>
+            END;
+        }
+        ?>
         </div>
         <?php alerts::flashMessages() ?>
     </main>
