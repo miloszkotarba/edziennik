@@ -8,7 +8,9 @@ class App
         '/dashboard',
         '/profile',
         '/oceny',
-        '/ogloszenia'
+        '/ogloszenia',
+        '/admin',
+        '/teacher'
     ];
     protected $controller = 'home';
     protected $method = 'index';

@@ -97,6 +97,15 @@ class Page
                         <span class="nav-item">Ustawienia konta</span>
                     </a>
                 </li>
+                <?php if($_SESSION['usersRole'] == 2)
+                    echo <<< END
+                <li>
+                    <a href="/admin">
+                        <i class="las la-tools"></i>
+                        <span class="nav-item">Administracja</span>
+                    </a>
+                </li>
+                END; ?>
             </ul>
         </nav>
         <?php

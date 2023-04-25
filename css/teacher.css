@@ -1,0 +1,126 @@
+.links-box {
+    padding: 30px !important;
+}
+
+.box {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    color: white;
+}
+
+.box .btn {
+    background: #283e7a;
+    padding: 10px 20px;
+    display: inline-block;
+    float: right;
+    margin-bottom: 0.5rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+}
+.box .btn div {
+    display: flex;
+}
+
+.box .btn i {
+    font-size: 1.3rem;
+    margin-right: 0.4rem;
+}
+
+table {
+    max-width: 1200px;
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    border-collapse:separate;
+    border-spacing: 0 1rem;
+}
+
+table tr {
+    background: #f7f7f7;
+}
+
+table tr td {
+    padding: 0.6rem 0;
+}
+table thead tr th{
+    background: #fff;
+    font-weight: 500;
+}
+
+table thead th:first-child {
+    text-align: left;
+}
+
+table thead .user {
+    margin-left: 20px;
+}
+
+table thead {
+    position: relative;
+}
+
+table thead::after {
+    content: "";
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: darkgrey;
+    border-radius: 5px;
+}
+
+table td img{
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    margin-left: 20px;
+}
+
+table td:first-child {
+    display: flex;
+    align-items: center;
+}
+
+table td:first-child div {
+    margin-left: 1rem;
+}
+
+table td:first-child div span {
+    font-weight: 300;
+    font-size: 0.9rem;
+}
+
+table td:first-child a {
+    text-decoration: none;
+    color: #283e7a;
+}
+
+table td:first-child span {
+    display: block;
+    text-align: left;
+}
+
+table td .status {
+    background: rgb(19, 122, 19);
+    color: #fff;
+    font-size: 0.8rem;
+    padding: 6px 12px;
+    border-radius: 8px;
+}
+
+table td  a.mail{
+    color: #283e7a;
+}
+
+table td:last-child i.la-edit{
+    color: #283e7a;
+    font-size: 1.8rem;
+}
+
+table td:last-child i {
+    color: crimson;
+    font-size: 1.8rem;
+}
+

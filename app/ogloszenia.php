@@ -17,7 +17,7 @@ class Ogloszenia extends Controller
         $this->is_logged();
 
         //teacher
-        if ($_SESSION['usersRole'] == 1) {
+        if ($_SESSION['usersRole'] == 1 || $_SESSION['usersRole'] == 2) {
             header('Location: /ogloszenia/nauczyciel');
         } else {
             header('Location: /ogloszenia/lista');
@@ -35,7 +35,7 @@ class Ogloszenia extends Controller
         $this->is_logged();
         $result = $this->Model->showAllAnnouncements();
 
-        if ($_SESSION['usersRole'] == 1) $teacher = true;
+        if ($_SESSION['usersRole'] == 1 || $_SESSION['usersRole'] == 2) $teacher = true;
         else $teacher = false;
 
         require 'views/ogloszenia/announcement.list.php';
@@ -52,7 +52,7 @@ class Ogloszenia extends Controller
     public function is_teacher()
     {
         $this->is_logged();
-        if ($_SESSION['usersRole'] != 1) {
+        if ($_SESSION['usersRole'] != 1 && $_SESSION['usersRole'] != 2) {
             header('Location: /ogloszenia');
             exit();
         }
@@ -118,7 +118,8 @@ class Ogloszenia extends Controller
         }
     }
 
-    public function usun($link = NULL) {
+    public function usun($link = NULL)
+    {
         $this->is_teacher();
         if ($link == NULL) redirect('/ogloszenia/lista');
         $id_user = $_SESSION['usersId'];
