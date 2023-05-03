@@ -10,7 +10,10 @@ class App
         '/oceny',
         '/ogloszenia',
         '/admin',
-        '/teacher'
+        '/teacher',
+        '/student',
+        '/subject',
+        '/oddzial'
     ];
     protected $controller = 'home';
     protected $method = 'index';

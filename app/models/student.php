@@ -2,7 +2,7 @@
 
 require_once 'app/database.php';
 
-class Teachers
+class Students
 {
     private $db;
 
@@ -11,22 +11,9 @@ class Teachers
         $this->db = new Database;
     }
 
-    public function showAllTeachers()
+    public function insertStudent($name, $surname, $email, $login, $password)
     {
-        $this->db->query('SELECT usersId, usersName, usersSurname, usersEmail, DATE_FORMAT(createDate, "%d-%m-%Y %H:%i") createDate FROM users WHERE usersRole = 1 ORDER BY usersSurname, usersName');
-
-        $row = $this->db->resultSet();
-
-        if ($this->db->rowCount() > 0) {
-            return $row;
-        } else {
-            return false;
-        }
-    }
-
-    public function insertTeacher($name, $surname, $email, $login, $password)
-    {
-        $this->db->query('INSERT INTO users VALUES(NULL,:name,:surname,:email,:login,:password,1,NOW())');
+        $this->db->query('INSERT INTO users VALUES(NULL,:name,:surname,:email,:login,:password,0,NOW())');
         $this->db->bind(':name', $name);
         $this->db->bind(':surname', $surname);
         $this->db->bind(':email', $email);

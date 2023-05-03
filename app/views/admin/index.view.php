@@ -30,8 +30,24 @@ Page::displayNavigation();
             </div>
             <div class="content">
                 <ul>
-                    <li><a href="#">Dodawanie i modyfikacja uczniów</a></li>
+                    <li><a href="/student">Dodawanie i modyfikacja uczniów</a></li>
                     <li><a href="#">Przypisywanie uczniów do klas</a></li>
+                </ul>
+            </div>
+            <div class="header">
+                <h2>Przedmioty</h2>
+            </div>
+            <div class="content">
+                <ul>
+                    <li><a href="/subject/list">Dodawanie i modyfikacja przedmiotów</a></li>
+                </ul>
+            </div>
+            <div class="header">
+                <h2>Klasy</h2>
+            </div>
+            <div class="content">
+                <ul>
+                    <li><a href="/oddzial/list">Dodawanie i modyfikacja klas</a></li>
                 </ul>
             </div>
         </div>

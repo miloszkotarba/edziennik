@@ -14,6 +14,11 @@ class Profile extends Controller
         require_once 'views/profile.view.php';
     }
 
+    public function photo() {
+        $this->is_logged();
+        require_once  'views/profile.photo.change.php';
+    }
+
     public function is_logged()
     {
         if (!isset($_SESSION['usersId'])) {
