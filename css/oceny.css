@@ -266,6 +266,19 @@ ul {
     color: crimson;
 }
 
+/* OCENY */
+.category-form h1 {
+    color: red;
+}
+.category-form table {
+    width: 100%;
+}
+
+.category-form th, .category-form td, .category-form table {
+    border: 1px solid;
+    border-collapse: collapse;
+}
+
 @media only screen and (max-width: 1045px) {
     .list-box .row {
         display: flex;

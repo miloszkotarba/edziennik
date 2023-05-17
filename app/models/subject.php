@@ -64,12 +64,15 @@ class Subjects
 
     public function deleteSubject($subjectId)
     {
+        try{
         $this->db->query('DELETE FROM subjects WHERE subjectId = :subjectId');
         $this->db->bind(':subjectId', $subjectId);
 
         $final = $this->db->execute();
         if ($final) return true;
-        else return false;
+        else return false;} catch(Exception $e) {
+           return false;
+        }
     }
 
     public function modifySubject($subjectId, $subjectName) {

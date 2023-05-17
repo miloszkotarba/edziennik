@@ -23,6 +23,7 @@ Page::displayNavigation();
                 <ul>
                     <li><a href="#">Dodawanie i modyfikacja ocen</a></li>
                     <li><a href="#">Przeglądanie ocen</a></li>
+                    <li><a href="/oceny/test">Loszki kokoszki</a></li>
                 </ul>
             </div>
             <div class="header">

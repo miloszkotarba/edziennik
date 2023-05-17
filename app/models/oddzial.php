@@ -62,6 +62,44 @@ class Oddzialy
         }
     }
 
+
+    public function checkOddzialUniqueId($klasaId)
+    {
+        $this->db->query('SELECT * FROM klasa WHERE klasaId = :klasaId');
+        $this->db->bind(':klasaId', $klasaId);
+
+        $final = $this->db->resultSet();
+        if ($this->db->rowCount() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function checkOddzialExists($oddzialId)
+    {
+        $this->db->query('SELECT * FROM Oddzialy WHERE oddzialId = :oddzialId');
+        $this->db->bind(':oddzialId', $oddzialId);
+
+        $final = $this->db->resultSet();
+        if ($this->db->rowCount() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function checkKlasaId($klasaName) {
+        $this->db->query('SELECT klasaId FROM klasa WHERE klasaName = :klasaName');
+        $this->db->bind(':klasaName', $klasaName);
+        $final = $this->db->resultSet();
+        if ($this->db->rowCount() > 0) {
+            return $final;
+        } else {
+            return false;
+        }
+    }
+
     public function showAllOddzial()
     {
         $this->db->query('SELECT k.klasaId, k.klasaName, u.usersName, u.usersSurname FROM users u RIGHT JOIN klasa k ON u . usersId = k . tutorId WHERE u.usersRole=1
@@ -75,5 +113,46 @@ ORDER BY k.klasaName;');
         }
     }
 
+    public function checkSchoolYearId()
+    {
+        $this->db->query('SELECT YearId FROM SchoolYear ORDER BY semestr2do DESC LIMIT 1');
+        $row = $this->db->resultSet();
+        if($row) return $row;
+        else return false;
+    }
 
+    public function createOddzial($klasaId, $SchoolYearId)
+    {
+        $this->db->query('INSERT INTO `Oddzialy` (`oddzialId`, `klasaId`, `SchoolYearId`) VALUES (NULL, :klasaId, :SchoolYearId);');
+        $this->db->bind(':klasaId', $klasaId);
+        $this->db->bind(':SchoolYearId', $SchoolYearId);
+
+        $final = $this->db->execute();
+        if ($final) return true;
+        else return false;
+    }
+
+    public function showOddzialName($klasaId) {
+        $this->db->query('SELECT klasaName FROM klasa WHERE klasaId = :klasaId');
+        $this->db->bind(':klasaId', $klasaId);
+        $row = $this->db->resultSet();
+        if($row) return $row;
+        else return false;
+    }
+
+    public function showAllStudents()
+    {
+        $this->db->query('SELECT u.usersId, u.usersName, u.usersSurname, u.usersEmail, DATE_FORMAT(u.createDate, "%d-%m-%Y %H:%i") createDate, u.klasaId, k.klasaName
+FROM users u LEFT JOIN klasa k ON u.klasaId = k.klasaId
+WHERE usersRole = 0
+ORDER BY usersSurname, usersName;');
+
+        $result = $this->db->resultSet();
+
+        if ($this->db->rowCount() > 0) {
+            return $result;
+        } else {
+            return false;
+        }
+    }
 }

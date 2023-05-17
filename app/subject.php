@@ -93,7 +93,7 @@ class Subject extends Controller
         if ($this->Model->checkSubjectId($link)) {
             $final = $this->Model->deleteSubject($link);
             if (!$final) {
-                alerts::SetError("Błąd: Nie usunięto przedmiotu.", 0);
+                alerts::SetError("Błąd: Nie można usunąć przedmiotu, który jest przypisany.", 0);
                 redirect('/subject/list');
             } else {
                 alerts::SetSuccess("Usunięto przedmiot.");

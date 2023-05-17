@@ -26,7 +26,7 @@ class Teachers
 
     public function insertTeacher($name, $surname, $email, $login, $password)
     {
-        $this->db->query('INSERT INTO users VALUES(NULL,:name,:surname,:email,:login,:password,1,NOW())');
+        $this->db->query('INSERT INTO users VALUES(NULL,:name,:surname,:email,:login,:password,1,NOW(),NULL)');
         $this->db->bind(':name', $name);
         $this->db->bind(':surname', $surname);
         $this->db->bind(':email', $email);

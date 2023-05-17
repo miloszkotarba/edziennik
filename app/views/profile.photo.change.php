@@ -8,7 +8,11 @@ Page::displayNavigation();
     <div class="box">
         <div class="right">
             <div class="circle">
-                <img src="/img/no-avatar.png" alt="Avatar" style="height: 200px; width: 200px">
+                <img src="/img/no-avatar.png" alt="Avatar">
+                <div class="overlay">
+                    <i class="las la-camera"></i>
+                    <input type="file">
+                </div>
             </div>
             <div class="about-user">
                 <h2><?= $_SESSION['usersName']." ". $_SESSION['usersSurname']?></h2>

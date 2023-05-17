@@ -251,4 +251,9 @@ class Oceny extends Controller
             exit();
         }
     }
+
+    public function test() {
+        $this->is_teacher();
+        require 'views/oceny/teacher.grade.add.php';
+    }
 }

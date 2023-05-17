@@ -13,7 +13,8 @@ class App
         '/teacher',
         '/student',
         '/subject',
-        '/oddzial'
+        '/oddzial',
+        '/zajecia'
     ];
     protected $controller = 'home';
     protected $method = 'index';

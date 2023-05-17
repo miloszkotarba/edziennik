@@ -22,7 +22,7 @@ Page::displayNavigation();
             <div class="content">
                 <ul>
                     <li><a href="/teacher">Dodawanie i modyfikacja nauczycieli</a></li>
-                    <li><a href="#">Przypisywanie przedmiotów</a></li>
+                    <li><a href="/zajecia">Przypisywanie zajęć</a></li>
                 </ul>
             </div>
             <div class="header">
@@ -31,7 +31,7 @@ Page::displayNavigation();
             <div class="content">
                 <ul>
                     <li><a href="/student">Dodawanie i modyfikacja uczniów</a></li>
-                    <li><a href="#">Przypisywanie uczniów do klas</a></li>
+                    <li><a href="/student/class">Przypisywanie uczniów do klas</a></li>
                 </ul>
             </div>
             <div class="header">

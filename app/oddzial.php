@@ -76,6 +76,11 @@ class Oddzial extends Controller
         }
 
         $final = $this->Model->insertOddzial($data['name'],$data['wychowawcaId']);
+        $SchoolYearId = $this->Model->checkSchoolYearId();
+        $SchoolYearId = $SchoolYearId[0] -> YearId;
+        $klasaId = $this -> Model ->checkKlasaId($data['name']);
+        $klasaId = $klasaId[0] -> klasaId;
+        $this->Model->createOddzial($klasaId, $SchoolYearId);
         if (!$final) {
             alerts::SetError("Błąd: Nie dodano klasy.", 0);
             redirect('/admin');

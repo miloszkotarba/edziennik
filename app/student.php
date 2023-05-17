@@ -1,6 +1,7 @@
 <?php
 
 require_once 'models/student.php';
+require_once 'models/oddzial.php';
 require_once 'alerts.php';
 
 class Student extends Controller
@@ -10,6 +11,7 @@ class Student extends Controller
     public function __construct()
     {
         $this->Model = new Students();
+        $this->ModelOddzial = new Oddzialy();
     }
 
     public function index()
@@ -115,5 +117,74 @@ class Student extends Controller
         }
     }
 
+    public function class($link = NULL)
+    {
+        if ($link == NULL) {
+            $this->is_admin();
+            $result = $this->ModelOddzial->showAllOddzial();
+            require 'views/admin/student/student.klasa.assign.php';
+        } else {
+            ///check if link is klasaId
+            $final = $this->ModelOddzial->checkOddzialUniqueId($link);
 
+            if (!$final) {
+                header('Location: /student/class');
+            }
+
+            $result = $this->ModelOddzial->showAllStudents();
+            $className = $this->ModelOddzial->showOddzialName($link);
+            $className = $className[0]->klasaName;
+            require 'views/admin/student/student.klasa.assign.2.php';
+        }
+    }
+
+    public function remove($link = NULL, $link2 = NULL)
+    {
+        if (empty($link)) header('Location: /student/class');
+        $final = $this->Model->checkIfStudentHaveGrades($link);
+        $url = '/student/class/' . $link2;
+        if ($final == true) {
+            alerts::SetError("Błąd. Nie wypisano ucznia.");
+            redirect($url);
+        }
+        $final = $this->Model->deleteStudentFromClass($link);
+        if ($final == true) {
+            alerts::SetSuccess("Wypisano ucznia z klasy.");
+            redirect($url);
+        } else {
+            alerts::SetError("Błąd. Nie wypisano ucznia.");
+            redirect($url);
+        }
+    }
+
+    public function add($link = NULL, $link2 = NULL)
+    {
+        if (empty($link)) header('Location: /student/class');
+        $final = $this->Model->getUserInfo($link);
+        $url = '/student/class/' . $link2;
+        if (!$final) {
+            alerts::SetError("Błąd. Nie przypisano ucznia.");
+            redirect($url);
+        }
+
+        $usersRole = $final[0]->usersRole;
+        $klasaId = $final[0]->klasaId;
+        if ($usersRole != 0) {
+            alerts::SetError("Błąd. Nie przypisano ucznia.");
+            redirect($url);
+        }
+        if ($klasaId != NULL) {
+            alerts::SetError("Błąd. Nie przypisano ucznia.");
+            redirect($url);
+        }
+
+        $final = $this->Model->updateStudentClass($link, $link2);
+        if ($final) {
+            alerts::SetSuccess("Poprawnie przypisano ucznia.");
+            redirect($url);
+        } else {
+            alerts::SetError("Błąd. Nie przypisano ucznia.");
+            redirect($url);
+        }
+    }
 }
