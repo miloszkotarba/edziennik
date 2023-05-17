@@ -1,6 +1,8 @@
 <?php
 
 require_once 'models/categories.php';
+require 'models/zajecia.php';
+require 'models/oceny.php';
 require_once 'alerts.php';
 require_once 'Validate.php';
 
@@ -11,6 +13,8 @@ class Oceny extends Controller
     public function __construct()
     {
         $this->Model = new Category();
+        $this->ZajeciaModel = new Zajecie();
+        $this->OcenaModel = new Ocena();
     }
 
     public function index()
@@ -252,8 +256,26 @@ class Oceny extends Controller
         }
     }
 
-    public function test() {
+    public function lista()
+    {
         $this->is_teacher();
-        require 'views/oceny/teacher.grade.add.php';
+        $teacherId = $_SESSION['usersId'];
+        $result = $this->ZajeciaModel->showTeachersLessons($teacherId);
+        require 'views/oceny/teacher.grade.list.php';
+    }
+
+    public function pokaz($link = NULL)
+    {
+        $this->is_teacher();
+        if ($link == NULL) {
+            redirect('/oceny/lista');
+        }
+        $link = htmlspecialchars($link);
+        $row = $this->ZajeciaModel->checkIfZajeciaExists($link);
+        if (!$row) {
+            redirect('/oceny/lista');
+        }
+        $final = $this->OcenaModel->showStudentsFromLesson($link);
+        require 'views/oceny/teacher.grade.list.show.php';
     }
 }

@@ -104,7 +104,8 @@ class Zajecie
         else return false;
     }
 
-    public function checkIfZajeciaExists($zajeciaId) {
+    public function checkIfZajeciaExists($zajeciaId)
+    {
         $this->db->query('SELECT * FROM Zajecia WHERE zajeciaId = :zajeciaId');
         $this->db->bind(':zajeciaId', $zajeciaId);
 
@@ -117,9 +118,25 @@ class Zajecie
         }
     }
 
-    public function getOddzialId($zajeciaId) {
+    public function getOddzialId($zajeciaId)
+    {
         $this->db->query('SELECT * FROM Zajecia WHERE zajeciaId = :zajeciaId');
         $this->db->bind(':zajeciaId', $zajeciaId);
+
+        $row = $this->db->resultSet();
+
+        if ($this->db->rowCount() > 0) {
+            return $row;
+        } else {
+            return false;
+        }
+    }
+
+    public function showTeachersLessons($teacherId)
+    {
+        $this->db->query('SELECT z.zajeciaId, z.oddzialId, z.teacherId, z.subjectId, s.subjectName, k.klasaName, u.usersName, u.usersSurname
+FROM Zajecia z JOIN subjects s ON s.subjectId = z.subjectId JOIN oddzialy o ON o.oddzialId = z.oddzialId JOIN klasa k ON k.klasaId = o.klasaId JOIN users u ON u.usersId = k.tutorId WHERE z.teacherId = :teacherId ORDER BY k.klasaName, s.subjectName;');
+        $this->db->bind(':teacherId',$teacherId);
 
         $row = $this->db->resultSet();
 

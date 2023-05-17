@@ -124,3 +124,107 @@ table td:last-child i {
     font-size: 1.8rem;
 }
 
+/* ARKUSZ OCEN */
+.oceny {
+    width: 70%;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.oceny table {
+    border-radius: 7px !important;
+    background: rgb(253, 253, 253);
+}
+
+.oceny table,
+.oceny td,
+.oceny th {
+    border: 0.7px solid #c9c9c9;
+    border-collapse: collapse;
+}
+
+.oceny tr:nth-child(even) {
+    background: #f1f1f1;
+}
+
+.oceny td {
+    text-align: justify;
+    padding: 4.5px 8px;
+}
+
+.oceny th {
+    background: #89a702;
+    font-weight: 400;
+    padding: 4px;
+}
+.oceny td {
+    height: 21px;
+}
+
+.oceny .first td {
+    text-align: center;
+    background: #a4c801;
+    color: black;
+}
+
+.oceny .nr {
+    text-align: center;
+}
+
+.oceny td.nazwa {
+    white-space: nowrap;
+    text-align: left;
+}
+
+.oceny td.ob {
+
+    text-align: left !important;
+}
+
+.oceny .Sr1 {
+    text-align: right;
+}
+
+.oceny .Sr2 {
+    text-align: right;
+}
+
+.oceny .SrR {
+    text-align: right;
+}
+
+.oceny .opisowa {
+    text-align: center;
+}
+
+.oceny .btn-add {
+    text-align: center;
+}
+
+.oceny a.ocena {
+    color: black;
+    text-decoration: none;
+    padding: 2px 8px;
+    display: inline-block;
+    margin-bottom: 3px;
+}
+
+.oceny a {
+    text-decoration: none;
+    color: black;
+    user-select: none;
+}
+
+.oceny .btn-add a {
+    background: rgb(234, 234, 234);
+    height: 28px;
+    width: 40px;
+    display: block;
+    line-height: 28px;
+    border-radius: 5px;
+    box-shadow: 0 0 4px -1px rgb(59, 59, 59);
+    font-size: 1.1rem;
+}
+
+.oceny table td:first-child {
+    display: table-cell;
+}
