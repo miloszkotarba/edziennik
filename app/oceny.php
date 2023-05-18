@@ -278,4 +278,36 @@ class Oceny extends Controller
         $final = $this->OcenaModel->showStudentsFromLesson($link);
         require 'views/oceny/teacher.grade.list.show.php';
     }
+
+    public function dodaj($zajeciaId = NULL, $studentId = NULL)
+    {
+        $this->is_teacher();
+        $nazwa = $this->OcenaModel->getStudentbyId($studentId);
+        $imie = $nazwa[0]->usersName;
+        $nazwisko = $nazwa[0]->usersSurname;
+        $przedmiot = $this->OcenaModel->getSubjectbyZajeciaId($zajeciaId);
+        $przedmiot = $przedmiot[0]->subjectName;
+        $kategorie = $this->OcenaModel->showCategoriesbyZajeciaId($zajeciaId);
+        require 'views/oceny/teacher.grade.add.php';
+    }
+
+    public function add() {
+        $this->is_teacher();
+
+        //Sanitize POST data
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+        //Init data
+        $data = [
+            'kategoria' => trim($_POST['kategoria']),
+            'ocena' => trim($_POST['ocena']),
+            'komentarz' => trim($_POST['komentarz']),
+            'zajeciaId' => trim($_POST['zajeciaId']),
+            'studentId' => trim($_POST['studentId']),
+            'date' => trim($_POST['date']),
+        ];
+        $final = $this->OcenaModel->insertGrade($data['zajeciaId'],$data['studentId'],$data['kategoria'],$data['ocena'],$data['komentarz'], $data['date']);
+
+        echo '<script>javascript:window.close();</script>';
+    }
 }

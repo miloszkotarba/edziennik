@@ -95,13 +95,15 @@ class Zajecie
 
     public function removeLesson($zajeciaId)
     {
-        $this->db->query('DELETE FROM Zajecia WHERE zajeciaId = :zajeciaId');
+        try {
+            $this->db->query('DELETE FROM Zajecia WHERE zajeciaId = :zajeciaId');
 
-        $this->db->bind(':zajeciaId', $zajeciaId);
+            $this->db->bind(':zajeciaId', $zajeciaId);
 
-        $result = $this->db->execute();
-        if ($result) return true;
-        else return false;
+            $result = $this->db->execute();
+            if ($result) return true;
+            else return false;
+        } catch (Exception $e) {}
     }
 
     public function checkIfZajeciaExists($zajeciaId)

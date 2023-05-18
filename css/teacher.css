@@ -198,6 +198,13 @@ table td:last-child i {
 
 .oceny .btn-add {
     text-align: center;
+    position: relative;
+}
+
+.oceny .btn-add a {
+    position: relative;
+    transform: translateX(-50%);
+    left: 50%;
 }
 
 .oceny a.ocena {
@@ -227,4 +234,26 @@ table td:last-child i {
 
 .oceny table td:first-child {
     display: table-cell;
+}
+
+/* TOOLTIP */
+span.ocena {
+    position: relative;
+}
+.ocenatooltip {
+    background: #e2e281;
+    padding: 9px 12px;
+    color: #4a410b;
+    min-width: 200px;
+    width: 100%;
+    flex-direction: column;
+    font-size: 0.85rem;
+    border-radius: 5px;
+    box-shadow: 0px 0px 8px -2px #4a410b;
+    position: absolute;
+    display: none;
+    z-index: 1000;
+    top: 25px;
+    left: 0;
+    white-space: nowrap;
 }

@@ -131,7 +131,7 @@ class Zajecia extends Controller
             alerts::SetSuccess("Usunięto przypisanie przedmiotu.");
             redirect($url);
         } else {
-            alerts::SetError("Błąd: Nie usunięto przypisanie przedmiotu.");
+            alerts::SetError("Błąd: Nie usunięto przypisania przedmiotu.");
             redirect($url);
         }
     }
