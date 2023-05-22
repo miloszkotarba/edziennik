@@ -62,56 +62,6 @@ Page::displayNavigation();
                 }
             }
             ?>
-
-            <!--
-            <div class="row">
-                <div class="category-box first">
-                    <span>Praca klasowa</span>
-                    <div class="buttons">
-                        <a href="#"><i class="las la-edit"></i>Edytuj</a>
-                        <a href="#"><i class="las la-trash"></i>Usuń</a>
-                    </div>
-                </div>
-                <div class="category-box second">
-                    <span>Kartkówka</span>
-                    <div class="buttons">
-                        <a href="#"><i class="las la-edit"></i>Edytuj</a>
-                        <a href="#"><i class="las la-trash"></i>Usuń</a>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="category-box">
-                    <span>Test</span>
-                    <div class="buttons">
-                        <a href="#"><i class="las la-edit"></i>Edytuj</a>
-                        <a href="#"><i class="las la-trash"></i>Usuń</a>
-                    </div>
-                </div>
-                <div class="category-box">
-                    <span>Olimpiada językowa</span>
-                    <div class="buttons">
-                        <a href="#"><i class="las la-edit"></i>Edytuj</a>
-                        <a href="#"><i class="las la-trash"></i>Usuń</a>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="category-box">
-                    <span>Zadanie maturalne</span>
-                    <div class="buttons">
-                        <a href="#"><i class="las la-edit"></i>Edytuj</a>
-                        <a href="#"><i class="las la-trash"></i>Usuń</a>
-                    </div>
-                </div>
-                <div class="category-box">
-                    <span>Brak pracy domowej</span>
-                    <div class="buttons">
-                        <a href="#"><i class="las la-edit"></i>Edytuj</a>
-                        <a href="#"><i class="las la-trash"></i>Usuń</a>
-                    </div>
-                </div>
-            </div> -->
             <div style="margin-bottom: 1.5rem"></div>
         </div>
         <?php alerts::flashMessages() ?>
