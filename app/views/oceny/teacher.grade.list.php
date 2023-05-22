@@ -38,6 +38,7 @@ Page::displayNavigation();
             <td>$item->usersSurname $item->usersName </td>
             <td style="text-align: right">
                <a style="position: relative; text-decoration: none; color: #fff; background-color: rgba(19, 122, 19,0.9); padding: 8px 12px; border-radius: 6px; margin-right: 20px" href="/oceny/pokaz/$item->zajeciaId"><i style="color: white; margin-right: 5px; position: absolute; top: 50%; transform: translateY(-50%)" class="las la-plus-circle"></i><span style="margin-left: 35px"></span>Oceny</a>
+               <a style="position: relative; text-decoration: none; color: #fff; background-color: rgba(19, 122, 19,0.9); padding: 8px 12px; border-radius: 6px; margin-right: 20px" href="/oceny/seryjnie/$item->zajeciaId"><i style="color: white; margin-right: 5px; position: absolute; top: 50%; transform: translateY(-50%)" class="las la-plus-circle"></i><span style="margin-left: 35px"></span>Oceny seryjnie</a>
             </td>
             </tr>
             END;
