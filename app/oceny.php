@@ -25,7 +25,7 @@ class Oceny extends Controller
         if ($_SESSION['usersRole'] == 1) {
             header('Location: /oceny/nauczyciel');
         } else {
-            echo "UCZEN";
+            header('Location: /oceny/uczen');
         }
     }
 
@@ -60,7 +60,7 @@ class Oceny extends Controller
                 break;
             case "lista":
                 $id_user = $_SESSION['usersId'];
-                $row = $this->Model->showAllCategories($id_user);
+                $row = $this->Model->showCategoriesWithoutBasic($id_user);
                 require 'views/oceny/teacher.category.list.php';
                 break;
             case "edytuj":
@@ -288,10 +288,12 @@ class Oceny extends Controller
         $przedmiot = $this->OcenaModel->getSubjectbyZajeciaId($zajeciaId);
         $przedmiot = $przedmiot[0]->subjectName;
         $kategorie = $this->OcenaModel->showCategoriesbyZajeciaId($zajeciaId);
+        $systemKategorie = $this->OcenaModel->showSystemCategories($zajeciaId);
         require 'views/oceny/teacher.grade.add.php';
     }
 
-    public function add() {
+    public function add()
+    {
         $this->is_teacher();
 
         //Sanitize POST data
@@ -306,8 +308,65 @@ class Oceny extends Controller
             'studentId' => trim($_POST['studentId']),
             'date' => trim($_POST['date']),
         ];
-        $final = $this->OcenaModel->insertGrade($data['zajeciaId'],$data['studentId'],$data['kategoria'],$data['ocena'],$data['komentarz'], $data['date']);
 
-        echo '<script>javascript:window.close();</script>';
+
+        $data['date'] = $data['date'] . date(' H:i:s');
+
+        $final = $this->OcenaModel->insertGrade($data['zajeciaId'], $data['studentId'], $data['kategoria'], $data['ocena'], $data['komentarz'], $data['date']);
+
+        echo '<script>
+    opener.location.reload();
+    javascript:window.close();</script>';
+    }
+
+    public function is_student()
+    {
+        $this->is_logged();
+        if ($_SESSION['usersRole'] != 0) {
+            header('Location: /oceny');
+            exit();
+        }
+    }
+
+    public function uczen()
+    {
+        $this->is_student();
+        $studentId = $_SESSION['usersId'];
+        $final = $this->OcenaModel->showLessonsforStudent($studentId);
+        require 'views/oceny/student.grade.list.php';
+    }
+
+    public function szczegoly($gradeId = NULL, $studentId = NULL)
+    {
+        $this->is_teacher();
+        if (empty($gradeId) || empty($studentId)) {
+            header('Location: /oceny');
+            exit();
+        }
+        $this->is_teacher();
+        $nazwa = $this->OcenaModel->getStudentbyId($studentId);
+        $imie = $nazwa[0]->usersName;
+        $nazwisko = $nazwa[0]->usersSurname;
+        $przedmiot = $this->OcenaModel->getSubjectbyGradeId($gradeId);
+        $przedmiot = $przedmiot->subjectName;
+        $zajeciaId = $this->OcenaModel->getZajeciabyGradeId($gradeId);
+        $zajeciaId = $zajeciaId->zajeciaId;
+        $kategorie = $this->OcenaModel->showCategoriesbyZajeciaId($zajeciaId);
+        $systemKategorie = $this->OcenaModel->showSystemCategories($zajeciaId);
+        require 'views/oceny/teacher.grade.edit.php';
+    }
+
+
+    public function usun($gradeId = NULL)
+    {
+        $this->is_teacher();
+        if (empty($gradeId)) {
+            header('Location: /oceny');
+            exit();
+        }
+        $final = $this->OcenaModel->deleteGrade($gradeId);
+        echo '<script>
+    opener.location.reload();
+    javascript:window.close();</script>';
     }
 }

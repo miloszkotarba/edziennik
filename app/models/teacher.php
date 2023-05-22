@@ -51,5 +51,18 @@ class Teachers
             return false;
         }
     }
+
+    public function showUserId($email) {
+        $this->db->query('SELECT usersId FROM users WHERE usersEmail = :email');
+        $this->db->bind(':email', $email);
+
+        $row = $this->db->single();
+
+        if ($this->db->rowCount() > 0) {
+            return $row;
+        } else {
+            return false;
+        }
+    }
 }
 

@@ -3,7 +3,7 @@ require 'app/Page.php';
 require_once 'app/alerts.php';
 require 'app/models/oceny2.php';
 
-Page::displayHeader("e-Dziennik Ocenianie", "teacher.css");
+Page::displayHeader("e-Dziennik Oceny", "teacher.css");
 Page::displayNavigation();
 ?>
     <main>
@@ -11,7 +11,7 @@ Page::displayNavigation();
             <div class="header">
                 <h2 id="page-title">
                     <i class="las la-graduation-cap"></i>
-                    <span>Ocenianie</span>
+                    <span>Oceny</span>
                 </h2>
             </div>
         </div>
@@ -24,9 +24,7 @@ Page::displayNavigation();
                     <table style="width: 100%">
                         <tbody>
                         <tr>
-                            <th rowspan="2" class="nr" style="padding: 0 10px">Nr</th>
-                            <th rowspan="2">Nazwisko i imię</th>
-                            <th rowspan="2"></th>
+                            <th rowspan="2">Przedmiot</th>
                             <th colspan="4">Okres 1</th>
                             <th colspan="2">Okres 2</th>
                             <th colspan="3">Koniec roku</th>
@@ -57,23 +55,15 @@ Page::displayNavigation();
                     END;
                 }
                 if (!$final) {
-                    echo '<h1>Brak studentów</h1>';
+                    echo '<h1>Brak przedmiotów</h1>';
                     exit();
                 }
-                $licznik = 1;
                 foreach ($final as $item) {
                     $Model = new Grade();
-                    $result = $Model->showGradesForEachStudent($item->usersId, $link);
+                    $studentId = $_SESSION['usersId'];
+                    $result = $Model->showGradesForEachSubject($studentId,$item->zajeciaId);
+                    echo '<td class="nazwa">'.$item->subjectName.'</td>';
                     echo <<< END
-                                     <tr>
-                                <td class="nr">$licznik</td>
-                              END;
-                    $licznik++;
-                    echo '<td class="nazwa">' . $item->usersSurname . ' ' . $item->usersName . '</td>';
-                    echo <<< END
-                                <td class="btn-add">
-                                    <a target="popup" href="#" onclick="window.open(`/oceny/dodaj/$link/$item->usersId`,'popup','width=600,height=700'); return false;">+</a>
-                                </td>
                                 <td class="ob">
                                 END;
                     if ($result) {
@@ -82,7 +72,7 @@ Page::displayNavigation();
                         foreach ($result as $ocena) {
                             echo <<< END
                             <span class="ocena" style="margin-right: -5px">
-                            <a href="#" class="ocena" target="popup" onclick="window.open('/oceny/szczegoly/$ocena->ocenaId/$item->usersId','popup','width=700,height=700'); return false;" style="background: $ocena->color; margin-right: 5px">
+                            <a href="#" class="ocena" target="popup" onclick="window.open('/oceny/szczegoly/$ocena->ocenaId','popup','width=700,height=700'); return false;" style="background: $ocena->color; margin-right: 5px">
                             $ocena->value
                             <input type="hidden" value="$ocena->weight" id="weight">
                             <input type="hidden" value="$ocena->comment" id="comment">
@@ -122,7 +112,7 @@ Page::displayNavigation();
                         echo "Brak ocen";
                     }
                     if (!isset($temp) || $temp == 0) $temp = "-";
-                    $przewidywana_srodroczna = $Model->showPrzewidywanaSrodroczna($item->usersId, $link);
+                    $przewidywana_srodroczna = $Model->showPrzewidywanaSrodroczna($studentId, $item->zajeciaId);
                     echo <<< END
                                 </td>
                                 <td class="Sr1">$temp</td>
@@ -131,7 +121,7 @@ Page::displayNavigation();
                         echo <<< END
                                     <td class="opisowa">
                                     <span class="ocena" style="margin-right: -5px">
-                                    <a href="#" target="popup" onclick="window.open('/oceny/szczegoly/$przewidywana_srodroczna->ocenaId/$item->usersId','popup','width=700,height=700'); return false;" class="ocena" style="background: $przewidywana_srodroczna->color; margin-right: 5px" target="popup">$przewidywana_srodroczna->value
+                                    <a href="#" target="popup" onclick="window.open('/oceny/szczegoly/$przewidywana_srodroczna->ocenaId','popup','width=700,height=700'); return false;" class="ocena" style="background: $przewidywana_srodroczna->color; margin-right: 5px" target="popup">$przewidywana_srodroczna->value
                                      <input type="hidden" value="$przewidywana_srodroczna->weight" id="weight">
                                     <input type="hidden" value="$przewidywana_srodroczna->comment" id="comment">
                                     <input type="hidden" value="$przewidywana_srodroczna->date" id="date">
@@ -152,13 +142,13 @@ Page::displayNavigation();
                     } else {
                         echo '<td class="opisowa">-';
                     }
-                    $srodroczna = $Model->showSrodroczna($item->usersId, $link);
+                    $srodroczna = $Model->showSrodroczna($studentId, $item->zajeciaId);
                     echo '</td>   
                           <td class="opisowa">';
                     if ($srodroczna) {
                         echo <<< END
                                     <span class="ocena" style="margin-right: -5px">
-                                    <a href="#" target="popup" onclick="window.open('/oceny/szczegoly/$srodroczna->ocenaId/$item->usersId','popup','width=700,height=700'); return false;" class="ocena" style="background: $srodroczna->color; margin-right: 5px" target="popup">$srodroczna->value
+                                    <a href="#" target="popup" onclick="window.open('/oceny/szczegoly/$srodroczna->ocenaId','popup','width=700,height=700'); return false;" class="ocena" style="background: $srodroczna->color; margin-right: 5px" target="popup">$srodroczna->value
                                      <input type="hidden" value="$srodroczna->weight" id="weight">
                                     <input type="hidden" value="$srodroczna->comment" id="comment">
                                     <input type="hidden" value="$srodroczna->date" id="date">
@@ -181,14 +171,14 @@ Page::displayNavigation();
                     }
                     echo '</td>';
                     echo '<td class="ob">';
-                    $result = $Model->showGradesForEachStudentSem2($item->usersId, $link);
+                    $result = $Model->showGradesForEachSubjectSem2($studentId,$item->zajeciaId);
                     if ($result) {
                         $srednia = 0;
                         $wagi = 0;
                         foreach ($result as $ocena) {
                             echo <<< END
                             <span class="ocena" style="margin-right: -5px">
-                            <a href="#" target="popup" onclick="window.open('/oceny/szczegoly/$ocena->ocenaId/$item->usersId','popup','width=700,height=700'); return false;" class="ocena" style="background: $ocena->color; margin-right: 5px" target="popup">$ocena->value
+                            <a href="#" target="popup" onclick="window.open('/oceny/szczegoly/$ocena->ocenaId','popup','width=700,height=700'); return false;" class="ocena" style="background: $ocena->color; margin-right: 5px" target="popup">$ocena->value
                              <input type="hidden" value="$ocena->weight" id="weight">
                             <input type="hidden" value="$ocena->comment" id="comment">
                             <input type="hidden" value="$ocena->date" id="date">
@@ -241,7 +231,7 @@ Page::displayNavigation();
                     else {
                         $srednia_roczna = number_format((float)$srednia_roczna, 2, '.', '');
                     }
-                    $przewidywana_roczna = $Model->showPrzewidywanaRoczna($item->usersId, $link);
+                    $przewidywana_roczna = $Model->showPrzewidywanaRoczna($studentId, $item->zajeciaId);
                     echo <<< END
                                 </td>
                                 <td class="Sr2">$temp</td>
@@ -252,7 +242,7 @@ Page::displayNavigation();
                     if ($przewidywana_roczna) {
                         echo <<< END
                                     <span class="ocena" style="margin-right: -5px">
-                                    <a href="#" target="popup" onclick="window.open('/oceny/szczegoly/$przewidywana_roczna->ocenaId/$item->usersId','popup','width=700,height=700'); return false;" class="ocena" style="background: $przewidywana_roczna->color; margin-right: 5px" target="popup">$przewidywana_roczna->value
+                                    <a href="#" target="popup" onclick="window.open('/oceny/szczegoly/$przewidywana_roczna->ocenaId$','popup','width=700,height=700'); return false;" class="ocena" style="background: $przewidywana_roczna->color; margin-right: 5px" target="popup">$przewidywana_roczna->value
                                      <input type="hidden" value="$przewidywana_roczna->weight" id="weight">
                                     <input type="hidden" value="$przewidywana_roczna->comment" id="comment">
                                     <input type="hidden" value="$przewidywana_roczna->date" id="date">
@@ -275,11 +265,11 @@ Page::displayNavigation();
                     }
                     echo '</td>
                                 <td class="opisowa">';
-                    $roczna = $Model->showRoczna($item->usersId,$link);
+                    $roczna = $Model->showRoczna($studentId, $item->zajeciaId);
                     if($roczna) {
                         echo <<< END
                                     <span class="ocena" style="margin-right: -5px">
-                                    <a href="#" target="popup" onclick="window.open('/oceny/szczegoly/$roczna->ocenaId/$item->usersId','popup','width=700,height=700'); return false;" class="ocena" style="background: $roczna->color; margin-right: 5px" target="popup">$roczna->value
+                                    <a href="#" target="popup" onclick="window.open('/oceny/szczegoly/$roczna->ocenaId$','popup','width=700,height=700'); return false;" class="ocena" style="background: $roczna->color; margin-right: 5px" target="popup">$roczna->value
                                      <input type="hidden" value="$roczna->weight" id="weight">
                                     <input type="hidden" value="$roczna->comment" id="comment">
                                     <input type="hidden" value="$roczna->date" id="date">

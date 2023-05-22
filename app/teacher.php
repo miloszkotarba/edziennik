@@ -1,6 +1,7 @@
 <?php
 
 require_once 'models/teacher.php';
+require_once 'models/categories.php';
 require_once 'alerts.php';
 
 class Teacher extends Controller
@@ -10,6 +11,7 @@ class Teacher extends Controller
     public function __construct()
     {
         $this->Model = new Teachers();
+        $this->KategorieModel = new Category();
     }
 
     public function index()
@@ -103,6 +105,17 @@ class Teacher extends Controller
             alerts::SetError("Błąd: Nie dodano nauczyciela.", 0);
             redirect('/teacher/add');
         } else {
+
+            ///dodanie kategorii predefiniowanych
+            $newTeacherId = $this->Model->showUserId($data['email']);
+            $newTeacherId = $newTeacherId -> usersId;
+
+            $this->KategorieModel->insertCategory("przewidywana śródroczna",0,"b0c4de", 0,$newTeacherId);
+            $this->KategorieModel->insertCategory("śródroczna",0,"b0c4de", 0,$newTeacherId);
+            $this->KategorieModel->insertCategory("przewidywana roczna",0,"87cefa", 0,$newTeacherId);
+            $this->KategorieModel->insertCategory("roczna",0,"87cefa", 0,$newTeacherId);
+
+
             alerts::SetSuccess("Dodano nauczyciela.");
             header('Location: /teacher');
         }

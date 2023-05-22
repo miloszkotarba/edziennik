@@ -45,7 +45,7 @@ ORDER BY u.usersSurname, u.usersName;');
 
     public function getSubjectbyZajeciaId($zajeciaId)
     {
-        $this->db->query('SELECT s.subjectName FROM Zajecia z JOIN subjects s ON s.subjectId=z.subjectId WHERE z.zajeciaId = 57;');
+        $this->db->query('SELECT s.subjectName FROM Zajecia z JOIN subjects s ON s.subjectId=z.subjectId WHERE z.zajeciaId = :zajeciaId;');
 
         $this->db->bind(':zajeciaId', $zajeciaId);
 
@@ -60,7 +60,22 @@ ORDER BY u.usersSurname, u.usersName;');
 
     public function showCategoriesbyZajeciaId($zajeciaId)
     {
-        $this->db->query('SELECT categoryId, name FROM `categories` WHERE teacherId=(SELECT teacherId FROM Zajecia WHERE zajeciaId=:zajeciaId);');
+        $this->db->query('SELECT categoryId, name FROM `categories` WHERE teacherId=(SELECT teacherId FROM Zajecia WHERE zajeciaId=:zajeciaId) AND name != "przewidywana śródroczna" AND name != "przewidywana roczna" AND name != "śródroczna" AND name != "roczna" ORDER BY name ASC;');
+
+        $this->db->bind(':zajeciaId', $zajeciaId);
+
+        $result = $this->db->resultSet();
+
+        if ($this->db->rowCount() > 0) {
+            return $result;
+        } else {
+            return false;
+        }
+    }
+
+    public function showSystemCategories($zajeciaId)
+    {
+        $this->db->query('SELECT categoryId, name FROM `categories` WHERE teacherId=(SELECT teacherId FROM Zajecia WHERE zajeciaId=:zajeciaId) AND name IN("przewidywana śródroczna","przewidywana roczna", "roczna", "śródroczna") ORDER BY name ASC;');
 
         $this->db->bind(':zajeciaId', $zajeciaId);
 
@@ -76,7 +91,6 @@ ORDER BY u.usersSurname, u.usersName;');
     public function insertGrade($zajeciaId, $studentId, $categoryId, $value, $comment, $date)
     {
         $this->db->query('INSERT INTO `Oceny` VALUES (NULL, :zajeciaId, :studentId, :categoryId, :value, :date, :comment)');
-
         $this->db->bind(':zajeciaId', $zajeciaId);
         $this->db->bind(':studentId', $studentId);
         $this->db->bind(':categoryId', $categoryId);
@@ -86,7 +100,54 @@ ORDER BY u.usersSurname, u.usersName;');
 
         $result = $this->db->execute();
 
-        if($result) return true;
+        if ($result) return true;
+        else return false;
+    }
+
+    public function showLessonsforStudent($studentId)
+    {
+        $this->db->query('SELECT z.zajeciaId, s.subjectName FROM Zajecia z JOIN subjects s ON s.subjectId = z.subjectId WHERE z.oddzialId = (SELECT oddzialId FROM Oddzialy WHERE klasaId = (SElECT klasaId FROM users WHERE usersId = :studentId)) ORDER BY s.subjectName;');
+
+        $this->db->bind(':studentId', $studentId);
+
+        $result = $this->db->resultSet();
+        if ($result) return $result;
+        else return false;
+    }
+
+
+    public function getSubjectbyGradeId($ocenaId)
+    {
+        $this->db->query('SELECT s.subjectName
+FROM Oceny o JOIN zajecia z ON o.zajeciaId = z.zajeciaId JOIN subjects s ON s.subjectId = z.subjectId
+WHERE o.ocenaId = :ocenaId;');
+
+        $this->db->bind(':ocenaId', $ocenaId);
+
+        $result = $this->db->single();
+        if ($result) return $result;
+        else return false;
+    }
+
+    public function getZajeciabyGradeId($ocenaId)
+    {
+        $this->db->query('SELECT zajeciaId from Oceny
+WHERE ocenaId = :ocenaId;');
+
+        $this->db->bind(':ocenaId', $ocenaId);
+
+        $result = $this->db->single();
+        if ($result) return $result;
+        else return false;
+    }
+
+    public function deleteGrade($ocenaId)
+    {
+        $this->db->query('DELETE FROM Oceny WHERE ocenaId = :ocenaId');
+        $this->db->bind(':ocenaId', $ocenaId);
+
+        $result = $this->db->execute();
+        if ($result) return true;
         else return false;
     }
 }

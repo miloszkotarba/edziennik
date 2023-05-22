@@ -5,15 +5,15 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Dodawanie oceny</title>
+    <title>Edycja oceny</title>
     <link rel="stylesheet" href="/css/popup.css">
 </head>
 <body>
-<form action="/oceny/add" method="post">
+<form action="/oceny/edit" method="post">
     <table>
         <thead>
         <tr>
-            <th colspan="2">Dodawanie oceny</th>
+            <th colspan="2">Edycja oceny</th>
         </tr>
         </thead>
         <tbody>
@@ -81,6 +81,7 @@
             <td colspan="2">
                 <div class="btn">
                     <input type="submit" value="OK">
+                    <a href="/oceny/usun/<?=$gradeId?>">Usuń</a>
                     <a href="javascript:window.close()">Anuluj</a>
                 </div>
             </td>
@@ -108,3 +109,4 @@
 </script>
 </body>
 </html>
+

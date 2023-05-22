@@ -9,18 +9,19 @@ table {
     margin: 15px auto;
     width: 90%;
     background: rgb(250, 250, 250);
-    font-size: 1.1rem;
 }
 
 table th {
     background: #a4c801;
     padding: 12px;
     font-weight: 500;
+    font-size: 1rem;
 }
 
 table, table td {
     border: 1.2px solid #dfdfdf;
     border-collapse: collapse;
+    font-size: 0.9rem;
 }
 
 table td {
@@ -33,7 +34,7 @@ textarea {
     resize: none;
     border-radius: 5px;
     border: 1px solid darkgrey;
-    font-size: 1.1rem;
+    font-size: 1rem;
     padding: 3px 5px;
 }
 
@@ -41,17 +42,15 @@ input[type="date"] {
     padding: 8px 20px;
     border-radius: 5px;
     border: 1px solid darkgrey;
-    font-size: 1.05rem;
 }
 
 select {
     padding: 7px;
-    font-size: 1.05rem;
 }
 
 option {
-    padding: 8px 20px;
-    font-size: 1.05rem;
+    padding: 10px 25px;
+    font-size: 0.95rem;
 }
 
 a {
@@ -75,6 +74,15 @@ a {
     width: 120px;
     text-align: center;
     padding: 6px 0;
+    transition: all .05s ease-in-out;
+}
+
+.btn a:active {
+    background: #dfdfdf;
+}
+
+.btn a:nth-child(2) {
+    margin-right: 15px;
 }
 
 input[type="submit"] {
@@ -89,4 +97,11 @@ input[type="submit"] {
     outline: none;
     border: none;
     margin-right: 15px;
+    cursor: pointer;
+    transition: all .1s ease-in-out;
+}
+
+
+input[type="submit"]:active {
+    background: #dfdfdf;
 }

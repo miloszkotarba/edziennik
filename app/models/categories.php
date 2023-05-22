@@ -69,6 +69,20 @@ class Category
         }
     }
 
+    public function showCategoriesWithoutBasic($teacherId)
+    {
+        $this->db->query('SELECT categoryId, name, CONCAT("#",color) color FROM categories WHERE teacherId = :teacherId AND name != "przewidywana śródroczna" AND name != "śródroczna" AND name != "przewidywana roczna" AND name != "roczna" ORDER BY name;');
+        $this->db->bind(':teacherId', $teacherId);
+
+        $row = $this->db->resultSet();
+
+        if ($this->db->rowCount() > 0) {
+            return $row;
+        } else {
+            return false;
+        }
+    }
+
     public function showCategory($categoryId)
     {
         $this->db->query('SELECT * FROM categories WHERE categoryId = :categoryId;');
