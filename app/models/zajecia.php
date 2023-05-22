@@ -103,7 +103,8 @@ class Zajecie
             $result = $this->db->execute();
             if ($result) return true;
             else return false;
-        } catch (Exception $e) {}
+        } catch (Exception $e) {
+        }
     }
 
     public function checkIfZajeciaExists($zajeciaId)
@@ -138,9 +139,21 @@ class Zajecie
     {
         $this->db->query('SELECT z.zajeciaId, z.oddzialId, z.teacherId, z.subjectId, s.subjectName, k.klasaName, u.usersName, u.usersSurname
 FROM Zajecia z JOIN subjects s ON s.subjectId = z.subjectId JOIN oddzialy o ON o.oddzialId = z.oddzialId JOIN klasa k ON k.klasaId = o.klasaId JOIN users u ON u.usersId = k.tutorId WHERE z.teacherId = :teacherId ORDER BY k.klasaName, s.subjectName;');
-        $this->db->bind(':teacherId',$teacherId);
+        $this->db->bind(':teacherId', $teacherId);
 
         $row = $this->db->resultSet();
+
+        if ($this->db->rowCount() > 0) {
+            return $row;
+        } else {
+            return false;
+        }
+    }
+
+    public function getSchoolYear()
+    {
+        $this->db->query('SELECT * FROM `SchoolYear` ORDER BY YearId DESC LIMIT 1;');
+        $row = $this->db->single();
 
         if ($this->db->rowCount() > 0) {
             return $row;
