@@ -269,6 +269,7 @@ class Oceny extends Controller
         $this->is_teacher();
         if ($link == NULL) {
             redirect('/oceny/lista');
+            exit();
         }
         $link = htmlspecialchars($link);
         $row = $this->ZajeciaModel->checkIfZajeciaExists($link);
@@ -313,6 +314,8 @@ class Oceny extends Controller
         $data['date'] = $data['date'] . date(' H:i:s');
 
         $final = $this->OcenaModel->insertGrade($data['zajeciaId'], $data['studentId'], $data['kategoria'], $data['ocena'], $data['komentarz'], $data['date']);
+
+        alerts::SetSuccess("Dodano ocenę.");
 
         echo '<script>
     opener.location.reload();
@@ -365,8 +368,64 @@ class Oceny extends Controller
             exit();
         }
         $final = $this->OcenaModel->deleteGrade($gradeId);
+        if($final) {
+            alerts::SetSuccess("Usunięto ocenę.");
+        }
         echo '<script>
     opener.location.reload();
     javascript:window.close();</script>';
+    }
+
+    public function seryjnie($link = NULL)
+    {
+        $this->is_teacher();
+        if ($link == NULL) {
+            redirect('/oceny/lista');
+            exit();
+        }
+        $row = $this->ZajeciaModel->checkIfZajeciaExists($link);
+        if (!$row) {
+            redirect('/oceny/lista');
+        }
+        $final = $this->OcenaModel->showStudentsFromLesson($link);
+        $semestr = $this->ZajeciaModel->getSchoolYear();
+        $semestr1od = $semestr->semestr1od;
+        $semestr1do = $semestr->semestr1do;
+        $semestr2od = $semestr->semestr2od;
+        $semestr2do = $semestr->semestr2do;
+        $kategorie = $this->OcenaModel->showCategoriesbyZajeciaId($link);
+        $systemKategorie = $this->OcenaModel->showSystemCategories($link);
+        $data = Date('Y-m-d');
+        if ($data >= $semestr1od && $data <= $semestr1do) {
+            $semestr = 1;
+        } else if ($data >= $semestr2od && $data <= $semestr2do) {
+            $semestr = 2;
+        } else {
+            redirect('/oceny/lista');
+        }
+        require 'views/oceny/teacher.grade.add.multiple.php';
+    }
+
+    public function valid()
+    {
+        $this->is_teacher();
+
+        $ocena = $_POST['ocenaValue'];
+        $komentarz = $_POST['ocenaComment'];
+        $user = $_POST['user'];
+        $kategoria = $_POST['kategoria'];
+        $data = $_POST['date'] . " " . date("H:i:s");
+        $zajeciaId = $_POST['zajecia'];
+
+
+        foreach ($ocena as $index => $oceny) {
+            if($oceny !== "") {
+                $this->OcenaModel->insertGrade($zajeciaId,$user[$index],$kategoria,$oceny,$komentarz[$index],$data);
+            }
+        }
+
+        $link = '/oceny/pokaz/'.$zajeciaId;
+        alerts::SetSuccess("Pomyślnie dodano oceny.");
+        header("Location: $link");
     }
 }
