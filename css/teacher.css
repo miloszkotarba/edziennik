@@ -152,6 +152,10 @@ table td:last-child i {
     padding: 4.5px 8px;
 }
 
+.oceny td.grade {
+    width: 70px;
+}
+
 .oceny th {
     background: #89a702;
     font-weight: 400;
@@ -268,4 +272,149 @@ span.ocena {
 
 .ocenatooltip .teacher {
     white-space: nowrap;
+}
+
+input.ocenaValue {
+    width: 100%;
+    padding: 5px 10px;
+    font-size: 1.2rem;
+}
+
+textarea.ocenaComment {
+    width: 100%;
+    padding: 5px;
+    font-size: 1.1rem;
+    resize: none;
+}
+
+.ocena-header {
+    margin-bottom: 1.5rem;
+}
+
+.ocena-header table {
+    margin: 15px auto;
+    width: 40%;
+    max-width: 370px;
+    background: rgb(250, 250, 250);
+}
+
+.ocena-header table th {
+    background: #a4c801;
+    padding: 12px;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.ocena-header table, .ocena-header table td {
+    border: 1.2px solid #dfdfdf;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.ocena-header table td {
+    padding: 10px 12px;
+    white-space: nowrap;
+}
+
+.ocena-header textarea {
+    width: 100%;
+    resize: none;
+    border-radius: 5px;
+    border: 1px solid darkgrey;
+    font-size: 1rem;
+    padding: 3px 5px;
+}
+
+.ocena-header input[type="date"] {
+    padding: 8px 20px;
+    border-radius: 5px;
+    border: 1px solid darkgrey;
+    width: 100%;
+}
+
+.ocena-header  select {
+    padding: 7px;
+    width: 100%;
+}
+
+.ocena-header option {
+    padding: 10px 25px;
+    font-size: 0.95rem;
+}
+
+.ocena-header div.btn {
+    margin-top: 0.4rem;
+    width: 100%;
+    padding: 7px;
+    border-radius: 5px;
+    border: none;
+    border: 1px solid darkgrey;
+    transition: all .1s ease-in-out;
+    text-align: center;
+    box-shadow:  0 0 4px -2.5px rgb(59, 59, 59);
+    background: rgb(241, 241, 241);
+    user-select: none;
+}
+.ocena-header div.btn:hover {
+    cursor: pointer;
+}
+.ocena-header div.btn:active {
+    background: #dfdfdf;
+}
+
+.btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+
+.btn a {
+    background: rgb(241, 241, 241);
+    display: block;
+    border-radius: 6px;
+    box-shadow: 0 0 4px -1px rgb(59, 59, 59);
+    font-size: 1rem;
+    width: 120px;
+    text-align: center;
+    padding: 6px 0;
+    transition: all .05s ease-in-out;
+}
+
+.btn a:active {
+    background: #dfdfdf;
+}
+
+.btn a:nth-child(2) {
+    margin-right: 20px;
+}
+
+.btn input[type="submit"] {
+    background: rgb(241, 241, 241);
+    display: block;
+    border-radius: 6px;
+    box-shadow: 0 0 4px -1px rgb(59, 59, 59);
+    font-size: 1rem;
+    width: 120px;
+    text-align: center;
+    padding: 6px 0;
+    outline: none;
+    border: none;
+    margin-right: 15px;
+    cursor: pointer;
+    transition: all .1s ease-in-out;
+}
+
+
+.btn input[type="submit"]:active {
+    background: #dfdfdf;
+}
+
+.ocenaValue {
+   border-radius: 5px;
+    border: 1px solid black;
+}
+
+.border {
+    border: 3px solid crimson !important;
 }
