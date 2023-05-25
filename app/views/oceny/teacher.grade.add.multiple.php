@@ -57,7 +57,8 @@ Page::displayNavigation();
                                 <tr>
                                     <td>Komentarz</td>
                                     <td><textarea name="mainComment" rows="6" id="mainComment"></textarea>
-                                    <div class="btn">Uzupełnij dla wszystkich</div></td>
+                                     <div class="btn showHide">Pokaż pola komentarzy</div>
+                                    <div class="btn comment">Uzupełnij dla wszystkich</div></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -69,7 +70,7 @@ Page::displayNavigation();
                             <th rowspan="2">Nazwisko i imię</th>
                             <th colspan="3">Okres $semestr</th>
                             <th rowspan="2">Ocena</th>
-                            <th rowspan="2">Komentarz</th>
+                            <th rowspan="2" class="commentth">Komentarz</th>
                         </tr>
                         <tr class="first">
                             <td style="text-align: center">Oceny bieżące</td>
@@ -224,7 +225,7 @@ Page::displayNavigation();
                     echo <<< END
                                 <td class="SrR">$srednia_roczna</td>
                                 <td class="grade"><input type="text" class="ocenaValue" name="ocenaValue[]"></td>
-                                <td><textarea name="ocenaComment[]" class="ocenaComment" rows="4"></textarea>
+                                <td class="tdcomment"><textarea name="ocenaComment[]" class="ocenaComment" rows="4"></textarea>
                                 <input type="hidden" name="user[]" value="$item->usersId"></td>
                                 </tr>
                     END;
@@ -285,7 +286,7 @@ Page::displayNavigation();
             }
         </script>
         <script>
-            let commentBtn = document.querySelector('.btn')
+            let commentBtn = document.querySelector('.btn.comment')
 
             commentBtn.addEventListener("click", () => {
                 let mainComment = document.getElementById('mainComment').value
@@ -310,6 +311,38 @@ Page::displayNavigation();
                     }
                 })
             })
+
+            let showHideBtn = document.querySelector('.btn.showHide')
+            showHideBtn.addEventListener("click", () => {
+                let ocenaComment = document.querySelectorAll('.ocenaComment')
+                ocenaComment.forEach((box) => {
+                    if(box.style.display == "none") {
+                        let tdcomments = document.querySelectorAll('.tdcomment')
+                        tdcomments.forEach((tdcommenT) => {
+                            tdcommenT.style.display = "table-cell"
+                        })
+                        document.querySelector('.commentth').style.display = "table-cell"
+                        box.style.display = "block"
+                    }
+                    else {
+                        box.style.display = "none"
+                        document.querySelector('.commentth').style.display = "none"
+                        let tdcomments = document.querySelectorAll('.tdcomment')
+                        tdcomments.forEach((tdcommenT) => {
+                            tdcommenT.style.display = "none"
+                        })
+                    }
+                })
+            })
+
+            start = () => {
+                let tdcomments = document.querySelectorAll('.tdcomment')
+                tdcomments.forEach((tdcommenT) => {
+                    tdcommenT.style.display = "none"
+                })
+            }
+
+            start()
         </script>
     </main>
 <?php

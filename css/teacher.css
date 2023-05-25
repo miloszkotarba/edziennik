@@ -285,6 +285,15 @@ textarea.ocenaComment {
     padding: 5px;
     font-size: 1.1rem;
     resize: none;
+    display: none;
+}
+
+.commentth {
+    display: none;
+}
+
+tdcomment {
+    display: none;
 }
 
 .ocena-header {
