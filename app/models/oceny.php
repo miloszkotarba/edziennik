@@ -119,7 +119,7 @@ ORDER BY u.usersSurname, u.usersName;');
     public function getSubjectbyGradeId($ocenaId)
     {
         $this->db->query('SELECT s.subjectName
-FROM Oceny o JOIN zajecia z ON o.zajeciaId = z.zajeciaId JOIN subjects s ON s.subjectId = z.subjectId
+FROM Oceny o JOIN Zajecia z ON o.zajeciaId = z.zajeciaId JOIN subjects s ON s.subjectId = z.subjectId
 WHERE o.ocenaId = :ocenaId;');
 
         $this->db->bind(':ocenaId', $ocenaId);

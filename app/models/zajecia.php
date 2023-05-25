@@ -41,7 +41,7 @@ class Zajecie
 
     public function showAllLessons($oddzialId)
     {
-        $this->db->query('SELECT z.zajeciaId, z.oddzialId, z.teacherId, u.usersName, u.usersSurname, z.subjectId, s.subjectName FROM Zajecia Z JOIN subjects s ON s.subjectId = z.subjectId JOIN users u ON u.usersId = z.teacherId WHERE z.oddzialId = :oddzialId ORDER BY s.subjectName ASC;');
+        $this->db->query('SELECT z.zajeciaId, z.oddzialId, z.teacherId, u.usersName, u.usersSurname, z.subjectId, s.subjectName FROM Zajecia z JOIN subjects s ON s.subjectId = z.subjectId JOIN users u ON u.usersId = z.teacherId WHERE z.oddzialId = :oddzialId ORDER BY s.subjectName ASC;');
 
         $this->db->bind(':oddzialId', $oddzialId);
 
@@ -55,7 +55,7 @@ class Zajecie
 
     public function showAllTeachers()
     {
-        $this->db->query('SELECT usersId, usersName, usersSurname FROM nauczyciele ORDER BY usersSurname, usersName');
+        $this->db->query('SELECT usersId, usersName, usersSurname FROM NAUCZYCIELE ORDER BY usersSurname, usersName');
 
         $row = $this->db->resultSet();
 
@@ -138,7 +138,7 @@ class Zajecie
     public function showTeachersLessons($teacherId)
     {
         $this->db->query('SELECT z.zajeciaId, z.oddzialId, z.teacherId, z.subjectId, s.subjectName, k.klasaName, u.usersName, u.usersSurname
-FROM Zajecia z JOIN subjects s ON s.subjectId = z.subjectId JOIN oddzialy o ON o.oddzialId = z.oddzialId JOIN klasa k ON k.klasaId = o.klasaId JOIN users u ON u.usersId = k.tutorId WHERE z.teacherId = :teacherId ORDER BY k.klasaName, s.subjectName;');
+FROM Zajecia z JOIN subjects s ON s.subjectId = z.subjectId JOIN Oddzialy o ON o.oddzialId = z.oddzialId JOIN klasa k ON k.klasaId = o.klasaId JOIN users u ON u.usersId = k.tutorId WHERE z.teacherId = :teacherId ORDER BY k.klasaName, s.subjectName;');
         $this->db->bind(':teacherId', $teacherId);
 
         $row = $this->db->resultSet();
