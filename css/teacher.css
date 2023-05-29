@@ -379,8 +379,8 @@ tdcomment {
 }
 
 .btn a {
-    background: rgb(241, 241, 241);
-    display: block;
+    /*background: rgb(241, 241, 241);*/
+   /* display: block; */
     border-radius: 6px;
     box-shadow: 0 0 4px -1px rgb(59, 59, 59);
     font-size: 1rem;
