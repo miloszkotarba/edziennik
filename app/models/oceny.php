@@ -150,4 +150,31 @@ WHERE ocenaId = :ocenaId;');
         if ($result) return true;
         else return false;
     }
+
+    public function showNamebyCategoryId($categoryId)
+    {
+        $this->db->query('SELECT name FROM categories WHERE categoryId = :categoryId');
+        $this->db->bind(':categoryId', $categoryId);
+
+        $result = $this->db->single();
+        if ($result) return $result;
+        else return false;
+    }
+
+    public function checkSystemGrade($categoryId, $zajeciaId, $studentId)
+    {
+        $this->db->query('SELECT ocenaId FROM Oceny WHERE categoryId = :categoryId AND zajeciaId = :zajeciaId AND studentId = :studentId');
+
+        $this->db->bind(':categoryId', $categoryId);
+        $this->db->bind(':zajeciaId', $zajeciaId);
+        $this->db->bind(':studentId', $studentId);
+
+        $result = $this->db->execute();
+
+        if ($this->db->rowCount() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

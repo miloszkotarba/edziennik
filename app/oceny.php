@@ -313,9 +313,28 @@ class Oceny extends Controller
 
         $data['date'] = $data['date'] . date(' H:i:s');
 
-        $final = $this->OcenaModel->insertGrade($data['zajeciaId'], $data['studentId'], $data['kategoria'], $data['ocena'], $data['komentarz'], $data['date']);
-
-        alerts::SetSuccess("Dodano ocenę.");
+        $kategoriaName = $this->OcenaModel->showNamebyCategoryId($data['kategoria'])->name;
+        $kategorieSystemowe = array("przewidywana śródroczna", "śródroczna", "przewidywana roczna", "roczna");
+        if (in_array($kategoriaName, $kategorieSystemowe)) {
+            $final = $this->OcenaModel->checkSystemGrade($data['kategoria'], $data['zajeciaId'], $data['studentId']);
+            if (!$final) {
+                $final = $this->OcenaModel->insertGrade($data['zajeciaId'], $data['studentId'], $data['kategoria'], $data['ocena'], $data['komentarz'], $data['date']);
+                if ($final) {
+                    alerts::SetSuccess("Dodano ocenę.");
+                } else {
+                    alerts::SetError("Błąd. Nie dodano oceny.");
+                }
+            } else {
+                alerts::SetError("Błąd. Nie dodano oceny");
+            }
+        } else {
+            $final = $this->OcenaModel->insertGrade($data['zajeciaId'], $data['studentId'], $data['kategoria'], $data['ocena'], $data['komentarz'], $data['date']);
+            if ($final) {
+                alerts::SetSuccess("Dodano ocenę.");
+            } else {
+                alerts::SetError("Błąd. Nie dodano oceny.");
+            }
+        }
 
         echo '<script>
     opener.location.reload();
@@ -368,7 +387,7 @@ class Oceny extends Controller
             exit();
         }
         $final = $this->OcenaModel->deleteGrade($gradeId);
-        if($final) {
+        if ($final) {
             alerts::SetSuccess("Usunięto ocenę.");
         }
         echo '<script>
@@ -419,12 +438,12 @@ class Oceny extends Controller
 
 
         foreach ($ocena as $index => $oceny) {
-            if($oceny !== "") {
-                $this->OcenaModel->insertGrade($zajeciaId,$user[$index],$kategoria,$oceny,$komentarz[$index],$data);
+            if ($oceny !== "") {
+                $this->OcenaModel->insertGrade($zajeciaId, $user[$index], $kategoria, $oceny, $komentarz[$index], $data);
             }
         }
 
-        $link = '/oceny/pokaz/'.$zajeciaId;
+        $link = '/oceny/pokaz/' . $zajeciaId;
         alerts::SetSuccess("Pomyślnie dodano oceny.");
         header("Location: $link");
     }
