@@ -114,12 +114,16 @@ class Category
 
     public function deleteCategory($categoryId)
     {
-        $this->db->query('DELETE FROM categories WHERE categoryId = :categoryId');
-        $this->db->bind(':categoryId', $categoryId);
+        try {
+            $this->db->query('DELETE FROM categories WHERE categoryId = :categoryId');
+            $this->db->bind(':categoryId', $categoryId);
 
-        $final = $this->db->execute();
-        if ($final) return true;
-        else return false;
+            $final = $this->db->execute();
+            if ($final) return true;
+            else return false;
+        } catch (Exception $e) {
+            return false;
+        }
     }
 
 }
