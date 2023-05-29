@@ -72,7 +72,7 @@ Page::displayNavigation();
                         foreach ($result as $ocena) {
                             echo <<< END
                             <span class="ocena" style="margin-right: -5px">
-                            <a href="#" class="ocena" target="popup" onclick="window.open('/oceny/szczegoly/$ocena->ocenaId','popup','width=700,height=700'); return false;" style="background: $ocena->color; margin-right: 5px">
+                            <a href="#" class="ocena" style="background: $ocena->color; margin-right: 5px">
                             $ocena->value
                             <input type="hidden" value="$ocena->weight" id="weight">
                             <input type="hidden" value="$ocena->comment" id="comment">
@@ -121,7 +121,7 @@ Page::displayNavigation();
                         echo <<< END
                                     <td class="opisowa">
                                     <span class="ocena" style="margin-right: -5px">
-                                    <a href="#" target="popup" onclick="window.open('/oceny/szczegoly/$przewidywana_srodroczna->ocenaId','popup','width=700,height=700'); return false;" class="ocena" style="background: $przewidywana_srodroczna->color; margin-right: 5px" target="popup">$przewidywana_srodroczna->value
+                                    <a href="#"  class="ocena" style="background: $przewidywana_srodroczna->color; margin-right: 5px">$przewidywana_srodroczna->value
                                      <input type="hidden" value="$przewidywana_srodroczna->weight" id="weight">
                                     <input type="hidden" value="$przewidywana_srodroczna->comment" id="comment">
                                     <input type="hidden" value="$przewidywana_srodroczna->date" id="date">
@@ -148,7 +148,7 @@ Page::displayNavigation();
                     if ($srodroczna) {
                         echo <<< END
                                     <span class="ocena" style="margin-right: -5px">
-                                    <a href="#" target="popup" onclick="window.open('/oceny/szczegoly/$srodroczna->ocenaId','popup','width=700,height=700'); return false;" class="ocena" style="background: $srodroczna->color; margin-right: 5px" target="popup">$srodroczna->value
+                                    <a href="#" class="ocena" style="background: $srodroczna->color; margin-right: 5px">$srodroczna->value
                                      <input type="hidden" value="$srodroczna->weight" id="weight">
                                     <input type="hidden" value="$srodroczna->comment" id="comment">
                                     <input type="hidden" value="$srodroczna->date" id="date">
@@ -178,7 +178,7 @@ Page::displayNavigation();
                         foreach ($result as $ocena) {
                             echo <<< END
                             <span class="ocena" style="margin-right: -5px">
-                            <a href="#" target="popup" onclick="window.open('/oceny/szczegoly/$ocena->ocenaId','popup','width=700,height=700'); return false;" class="ocena" style="background: $ocena->color; margin-right: 5px" target="popup">$ocena->value
+                            <a href="#" class="ocena" style="background: $ocena->color; margin-right: 5px">$ocena->value
                              <input type="hidden" value="$ocena->weight" id="weight">
                             <input type="hidden" value="$ocena->comment" id="comment">
                             <input type="hidden" value="$ocena->date" id="date">
@@ -242,7 +242,7 @@ Page::displayNavigation();
                     if ($przewidywana_roczna) {
                         echo <<< END
                                     <span class="ocena" style="margin-right: -5px">
-                                    <a href="#" target="popup" onclick="window.open('/oceny/szczegoly/$przewidywana_roczna->ocenaId$','popup','width=700,height=700'); return false;" class="ocena" style="background: $przewidywana_roczna->color; margin-right: 5px" target="popup">$przewidywana_roczna->value
+                                    <a href="#" class="ocena" style="background: $przewidywana_roczna->color; margin-right: 5px">$przewidywana_roczna->value
                                      <input type="hidden" value="$przewidywana_roczna->weight" id="weight">
                                     <input type="hidden" value="$przewidywana_roczna->comment" id="comment">
                                     <input type="hidden" value="$przewidywana_roczna->date" id="date">
@@ -269,7 +269,7 @@ Page::displayNavigation();
                     if($roczna) {
                         echo <<< END
                                     <span class="ocena" style="margin-right: -5px">
-                                    <a href="#" target="popup" onclick="window.open('/oceny/szczegoly/$roczna->ocenaId$','popup','width=700,height=700'); return false;" class="ocena" style="background: $roczna->color; margin-right: 5px" target="popup">$roczna->value
+                                    <a href="#" class="ocena" style="background: $roczna->color; margin-right: 5px">$roczna->value
                                      <input type="hidden" value="$roczna->weight" id="weight">
                                     <input type="hidden" value="$roczna->comment" id="comment">
                                     <input type="hidden" value="$roczna->date" id="date">
