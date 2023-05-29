@@ -241,7 +241,7 @@ class Oceny extends Controller
                 alerts::SetSuccess("Usunięto kategorię.");
                 header('Location: /oceny/kategorie/lista');
             } else {
-                alerts::SetError("Nastąpił błąd. Nie usunięto kategorii.");
+                alerts::SetError("Nie usunięto kategorii z przypisanymi ocenami.");
                 redirect('/oceny/kategorie/lista');
             }
         }
