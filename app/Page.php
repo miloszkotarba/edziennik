@@ -61,28 +61,19 @@ class Page
                         <span>Strona główna</span>
                     </a>
                 </li>
+                <?php if($_SESSION['usersRole'] != 2)
+                    echo <<< END
                 <li>
                     <a href="/oceny">
                         <i class="las la-graduation-cap"></i>
-                        <span>Oceny</span>
+                        <span class="nav-item">Oceny</span>
                     </a>
                 </li>
-                <li>
-                    <a href="#">
-                        <i class="las la-tasks"></i>
-                        <span class="nav-item">Tematy zajęć</span>
-                    </a>
-                </li>
+                END; ?>
                 <li>
                     <a href="/ogloszenia">
                         <i class="las la-scroll"></i>
                         <span class="nav-item">Ogłoszenia</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="las la-envelope"></i>
-                        <span class="nav-item">Wiadomości</span>
                     </a>
                 </li>
                 <li>
