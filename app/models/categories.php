@@ -126,4 +126,16 @@ class Category
         }
     }
 
+    public function deleteAllCategories($teacherId) {
+        try {
+            $this->db->query('DELETE FROM categories WHERE teacherId = :teacherId');
+            $this->db->bind(':teacherId', $teacherId);
+
+            $final = $this->db->execute();
+            if ($final) return true;
+            else return false;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
 }
