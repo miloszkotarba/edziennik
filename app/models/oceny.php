@@ -177,4 +177,30 @@ WHERE ocenaId = :ocenaId;');
             return false;
         }
     }
+
+    public function getGradeValueCommentCategory($ocenaId)
+    {
+        $this->db->query('SELECT o.value, o.date,(SELECT name FROM categories WHERE categoryId = o.categoryId) categoryName, o.comment FROM Oceny o WHERE o.ocenaId = :ocenaId;');
+
+        $this->db->bind(':ocenaId', $ocenaId);
+
+        $result = $this->db->single();
+        if ($this->db->rowCount() > 0) return $result;
+        else return false;
+    }
+
+    public function updateGrade($ocenaId, $value, $date, $comment, $categoryId)
+    {
+        $this->db->query('UPDATE Oceny SET value = :value, date = :date, comment = :comment, categoryId = :categoryId WHERE ocenaId = :ocenaId');
+
+        $this->db->bind(':ocenaId', $ocenaId);
+        $this->db->bind(':value', $value);
+        $this->db->bind(':date', $date);
+        $this->db->bind(':comment', $comment);
+        $this->db->bind(':categoryId', $categoryId);
+
+        $result = $this->db->execute();
+        if ($result) return true;
+        else return false;
+    }
 }
