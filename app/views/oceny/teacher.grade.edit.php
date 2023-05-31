@@ -19,11 +19,11 @@
         <tbody>
         <tr>
             <td>Nazwisko i imię</td>
-            <td><?=$nazwisko?> <?=$imie?></td>
+            <td><?= $nazwisko ?> <?= $imie ?></td>
         </tr>
         <tr>
             <td>Przedmiot</td>
-            <td><?=$przedmiot?></td>
+            <td><?= $przedmiot ?></td>
         </tr>
         <tr>
             <td>Kategoria</td>
@@ -32,19 +32,27 @@
                     <option disabled>Kategorie systemowe</option>
                     <?php
                     foreach ($systemKategorie as $kategoria) {
-                        echo $kategoria->categoryId;
-                        echo <<< END
-                        <option value="$kategoria->categoryId">$kategoria->name</option>
-                        END;
+                        if ($category === $kategoria->name) {
+                            $previous = $kategoria->name;
+                            echo '<option value="' . $kategoria->categoryId . '" selected>' . $kategoria->name . '</option>';
+                        } else {
+                            echo <<< END
+                            <option value="$kategoria->categoryId">$kategoria->name</option>
+                            END;
+                        }
                     }
                     ?>
                     <option disabled>Kategorie użytkownika</option>
                     <?php
                     foreach ($kategorie as $kategoria) {
-                        echo $kategoria->categoryId;
-                        echo <<< END
-                        <option value="$kategoria->categoryId">$kategoria->name</option>
-                        END;
+                        if ($category === $kategoria->name) {
+                            $previous = $kategoria->name;
+                            echo '<option value="' . $kategoria->categoryId . '" selected>' . $kategoria->name . '</option>';
+                        } else {
+                            echo <<< END
+                            <option value="$kategoria->categoryId">$kategoria->name</option>
+                            END;
+                        }
                     }
                     ?>
                 </select>
@@ -54,59 +62,44 @@
             <td>Ocena</td>
             <td>
                 <select name="ocena">
-                    <option value="+">+</option>
-                    <option value="-">-</option>
-                    <option value="bz">bz</option>
-                    <option value="np">np</option>
-                    <option value="nk">nk</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5" selected>5</option>
-                    <option value="6">6</option>
+                    <option value="+" <?php if ($value == '+') echo 'selected'; ?>>+</option>
+                    <option value="-" <?php if ($value == '-') echo 'selected'; ?>>-</option>
+                    <option value="bz" <?php if ($value == 'bz') echo 'selected'; ?>>bz</option>
+                    <option value="np" <?php if ($value == 'np') echo 'selected'; ?>>np</option>
+                    <option value="1" <?php if ($value == '1') echo 'selected'; ?>>1</option>
+                    <option value="2" <?php if ($value == '2') echo 'selected'; ?>>2</option>
+                    <option value="3" <?php if ($value == '3') echo 'selected'; ?>>3</option>
+                    <option value="4" <?php if ($value == '4') echo 'selected'; ?>>4</option>
+                    <option value="5" <?php if ($value == '5') echo 'selected'; ?>>5</option>
+                    <option value="6" <?php if ($value == '6') echo 'selected'; ?>>6</option>
                 </select>
 
             </td>
         </tr>
         <tr>
             <td>Data</td>
-            <td><input type="date" id="theDate" name="date"></td>
+            <td><input type="date" id="theDate" name="date" value="<?=$data?>"></td>
         </tr>
         <tr>
             <td>Komentarz</td>
-            <td><textarea rows="5" cols="60" name="komentarz"/></textarea></td>
+            <td><textarea rows="5" cols="60" name="komentarz"/><?=$komentarz?></textarea></td>
         </tr>
         <tr>
             <td colspan="2">
                 <div class="btn">
                     <input type="submit" value="OK">
-                    <a href="/oceny/usun/<?=$gradeId?>">Usuń</a>
+                    <a href="/oceny/usun/<?= $gradeId ?>">Usuń</a>
                     <a href="javascript:window.close()">Anuluj</a>
                 </div>
             </td>
         </tr>
         </tbody>
+        <input type="hidden" name="ocenaId" value="<?= $gradeId ?>">
         <input type="hidden" name="zajeciaId" value="<?=$zajeciaId?>">
         <input type="hidden" name="studentId" value="<?=$studentId?>">
+        <input type="hidden" name="previousCategory" value="<?=$previous?>">
     </table>
 </form>
-<script>
-    dzisiaj();
-    function dzisiaj() {
-        var date = new Date();
-
-        var day = date.getDate();
-        var month = date.getMonth() + 1;
-        var year = date.getFullYear();
-
-        if (month < 10) month = "0" + month;
-        if (day < 10) day = "0" + day;
-
-        var today = year + "-" + month + "-" + day;
-        document.getElementById("theDate").value = today;
-    }
-</script>
 </body>
 </html>
 
