@@ -325,7 +325,7 @@ class Oceny extends Controller
                     alerts::SetError("Błąd. Nie dodano oceny.");
                 }
             } else {
-                alerts::SetError("Błąd. Nie dodano oceny");
+                alerts::SetError("Błąd: Nie dodano oceny");
             }
         } else {
             $final = $this->OcenaModel->insertGrade($data['zajeciaId'], $data['studentId'], $data['kategoria'], $data['ocena'], $data['komentarz'], $data['date']);
