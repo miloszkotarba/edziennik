@@ -58,7 +58,6 @@
                     <option value="-">-</option>
                     <option value="bz">bz</option>
                     <option value="np">np</option>
-                    <option value="nk">nk</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
