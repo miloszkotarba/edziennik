@@ -59,7 +59,7 @@ Page::displayNavigation();
             <td><span class="status">Aktywny</span></td>
             <td><a href="#" class="mail">$item->usersEmail</a></td>
             <td>
-                <a href="#" title="Modyfikuj użytkownika"><i class="las la-edit"></i></a>
+                <a href="teacher/edit/$item->usersId" title="Modyfikuj użytkownika"><i class="las la-edit"></i></a>
                 <a href="teacher/delete/$item->usersId" title="Usuń użytkownika"><i class="las la-trash"></i></a>
             </td>
             </tr>
