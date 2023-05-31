@@ -205,7 +205,6 @@ Page::displayNavigation();
                         $wagi = 0;
                         $temp = $srednia;
                     }
-
                     $srednia_roczna = ($sem1 + $temp) / 2;
 
                     if ($sem1 == 0) {
@@ -235,7 +234,7 @@ Page::displayNavigation();
                 </table>
                 <div class="btn">
                     <input type="submit" value="OK">
-                    <a href="/oceny/lista">Anuluj</a>
+                    <a href="/oceny/lista" style="background: #f1f1f1">Anuluj</a>
                 </div>
                 </form>
             </div>
@@ -302,7 +301,7 @@ Page::displayNavigation();
 
                 let oceny = document.querySelectorAll('.ocenaValue')
                 oceny.forEach((ocena) => {
-                    const values = ["np", "-", "+", "nk", "1", "2", "3", "4", "5", "6", "", "bz"];
+                    const values = ["np", "-", "+","1", "2", "3", "4", "5", "6", "", "bz"];
                     if (!values.includes(ocena.value)) {
                         ocena.classList.add('border')
                         e.preventDefault()
