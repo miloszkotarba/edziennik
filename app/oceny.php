@@ -375,6 +375,13 @@ class Oceny extends Controller
         $zajeciaId = $zajeciaId->zajeciaId;
         $kategorie = $this->OcenaModel->showCategoriesbyZajeciaId($zajeciaId);
         $systemKategorie = $this->OcenaModel->showSystemCategories($zajeciaId);
+        $result = $this->OcenaModel->getGradeValueCommentCategory($gradeId);
+        $value = $result->value;
+        $category = $result->categoryName;
+        $komentarz = $result->comment;
+        $data = $result->date;
+        $data = explode(" ", $data);
+        $data = $data[0];
         require 'views/oceny/teacher.grade.edit.php';
     }
 
@@ -446,5 +453,56 @@ class Oceny extends Controller
         $link = '/oceny/pokaz/' . $zajeciaId;
         alerts::SetSuccess("Pomyślnie dodano oceny.");
         header("Location: $link");
+    }
+
+    public function edit()
+    {
+        $this->is_teacher();
+
+        //Sanitize POST data
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+        //Init data
+        $data = [
+            'kategoria' => trim($_POST['kategoria']),
+            'ocena' => trim($_POST['ocena']),
+            'komentarz' => trim($_POST['komentarz']),
+            'ocenaId' => trim($_POST['ocenaId']),
+            'date' => trim($_POST['date']),
+            'zajeciaId' => trim($_POST['zajeciaId']),
+            'studentId' => trim($_POST['studentId']),
+            'previousCategory' => trim($_POST['previousCategory'])
+        ];
+
+        $data['date'] = $data['date'] . date(' H:i:s');
+        $data['komentarz'] = htmlspecialchars($data['komentarz']);
+
+        $kategoriaName = $this->OcenaModel->showNamebyCategoryId($data['kategoria'])->name;
+        $kategorieSystemowe = array("przewidywana śródroczna", "śródroczna", "przewidywana roczna", "roczna");
+
+        if (!in_array($kategoriaName, $kategorieSystemowe)) {
+            $final = $this->OcenaModel->updateGrade($data['ocenaId'], $data['ocena'], $data['date'], $data['komentarz'], $data['kategoria']);
+            if ($final) {
+                alerts::SetSuccess("Zmieniono ocenę.");
+            } else {
+                alerts::SetError("Błąd. Nie zmieniono oceny.");
+            }
+        } else {
+            $final = $this->OcenaModel->checkSystemGrade($data['kategoria'], $data['zajeciaId'], $data['studentId']);
+            if (!$final || $kategoriaName == $data['previousCategory']) {
+                $result = $this->OcenaModel->updateGrade($data['ocenaId'], $data['ocena'], $data['date'], $data['komentarz'], $data['kategoria']);
+                if ($result) {
+                    alerts::SetSuccess("Zmieniono ocenę.");
+                } else {
+                    alerts::SetError("Błąd. Nie zmieniono oceny.");
+                }
+            } else {
+                alerts::SetError("Nie można dodać oceny z tej kategorii.");
+            }
+        }
+
+        echo '<script>
+    opener.location.reload();
+    javascript:window.close();</script>';
     }
 }
