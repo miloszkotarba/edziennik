@@ -50,7 +50,7 @@ Page::displayNavigation();
             </td>
             <td>$item->usersSurname $item->usersName </td>
             <td style="text-align: right">
-                <a  href="#" title="Modyfikuj użytkownika"><i class="las la-edit"></i></a>
+                <a  href="/oddzial/edit/$item->klasaId" title="Modyfikuj użytkownika"><i class="las la-edit"></i></a>
                 <a style=" margin-right: 20px" href="/oddzial/delete/$item->klasaId" title="Usuń użytkownika"><i class="las la-trash"></i></a>
             </td>
             </tr>
