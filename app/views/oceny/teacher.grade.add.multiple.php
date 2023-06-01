@@ -6,6 +6,7 @@ require 'app/models/oceny2.php';
 Page::displayHeader("e-Dziennik Ocenianie", "teacher.css");
 Page::displayNavigation();
 ?>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <main>
         <div class="links-box" style="padding: 30px; width: 98%">
             <div class="header">
@@ -28,7 +29,7 @@ Page::displayNavigation();
                                 <tr>
                                     <td>Kategoria</td>
                                     <td>
-                                     <select name="kategoria">
+                                     <select name="kategoria" id="aktualnakategoria">
                     <option disabled>Kategorie systemowe</option>
                     END;
                     foreach ($systemKategorie as $kategoria) {
@@ -104,8 +105,8 @@ Page::displayNavigation();
                         $result2 = $Model->showGradesForEachStudentSem2($item->usersId, $link);
                         if ($semestr == 2) {
                             if($result2) {
-                            foreach ($result2 as $ocena) {
-                                echo <<< END
+                                foreach ($result2 as $ocena) {
+                                    echo <<< END
                             <span class="ocena" style="margin-right: -5px">
                             <a href="#" class="ocena" target="popup" onclick="window.open('/oceny/szczegoly/$ocena->ocenaId/$item->usersId','popup','width=700,height=700'); return false;" style="background: $ocena->color; margin-right: 5px">
                             $ocena->value
@@ -126,14 +127,14 @@ Page::displayNavigation();
                             </div>
                             </span>
                             END;
-                            } } else {
+                                } } else {
                                 echo "Brak ocen";
                             }
                         }
                         if($result) {
-                        foreach ($result as $ocena) {
-                            if ($semestr == 1) {
-                                echo <<< END
+                            foreach ($result as $ocena) {
+                                if ($semestr == 1) {
+                                    echo <<< END
                             <span class="ocena" style="margin-right: -5px">
                             <a href="#" class="ocena" target="popup" onclick="window.open('/oceny/szczegoly/$ocena->ocenaId/$item->usersId','popup','width=700,height=700'); return false;" style="background: $ocena->color; margin-right: 5px">
                             $ocena->value
@@ -154,7 +155,7 @@ Page::displayNavigation();
                             </div>
                             </span>
                             END;
-                            }; }
+                                }; }
                             if ($ocena->value != "np" && $ocena->value != "bz" && $ocena->value != "-" && $ocena->value != "+" && $ocena->value != "nk") {
                                 $srednia = $srednia + $ocena->value * $ocena->weight;
                                 $wagi = $wagi + $ocena->weight;
@@ -179,9 +180,16 @@ Page::displayNavigation();
                     }
                     if (!isset($temp) || $temp == 0) $temp = "-";
                     $przewidywana_srodroczna = $Model->showPrzewidywanaSrodroczna($item->usersId, $link);
+                    $przewidywana_srodroczna = $Model->showPrzewidywanaSrodroczna($item->usersId, $link);
+                    $sredniasem1 = $Model->SredniaSem1($link, $item->usersId);
+                    $sredniasem2 = $Model->SredniaSem2($link, $item->usersId);
+                    if ($sredniasem1->srednia != NULL) $sredniasemestr = $sredniasem1->srednia;
+                    else {
+                        $sredniasemestr = "-";
+                    };
                     echo <<< END
                                 </td>
-                                <td class="Sr1">$temp</td>
+                                <td class="Sr1">$sredniasemestr</td>
                     END;
                     $result = $Model->showGradesForEachStudentSem2($item->usersId, $link);
                     if ($result) {
@@ -221,11 +229,51 @@ Page::displayNavigation();
                     else {
                         $srednia_roczna = number_format((float)$srednia_roczna, 2, '.', '');
                     }
+
+                    if ($sredniasem1->srednia == NULL) {
+                        if ($sredniasem2->srednia != NULL) {
+                            $srednia_roczna = $sredniasem2->srednia;
+                        } else {
+                            $srednia_roczna = '-';
+                        }
+                    }
+                    if ($sredniasem1->srednia != NULL) {
+                        if ($sredniasem2->srednia == NULL) {
+                            $srednia_roczna = $sredniasem1->srednia;
+                        } else {
+                            $avg = ($sredniasem1->srednia + $sredniasem2->srednia) / 2;
+                            $avg = number_format((float)$avg, 2, '.', '');
+                            $srednia_roczna = $avg;
+                        }
+                    }
                     echo <<< END
                                 <td class="SrR">$srednia_roczna</td>
-                                <td class="grade"><input type="text" class="ocenaValue" name="ocenaValue[]"></td>
+                                <td class="grade"><input type="text" class="ocenaValue" name="ocenaValue[]" id="$item->usersId"></td>
                                 <td class="tdcomment"><textarea name="ocenaComment[]" class="ocenaComment" rows="4"></textarea>
                                 <input type="hidden" name="user[]" value="$item->usersId"></td>
+                                <div class="systemGrades">
+                    END;
+
+                    $systemGrades = $Model->getSystemGradesByStudent($item->usersId, $link);
+                    if ($systemGrades) {
+                        foreach ($systemGrades as $systemOcena) {
+                            $systemNames = array("przewidywana śródroczna", "śródroczna", "przewidywana roczna", "roczna");
+                            if (in_array($systemOcena->name, $systemNames)) {
+                                if($systemOcena->name == "przewidywana śródroczna") {
+                                    $systemOcena->name = "przewidywana_srodroczna";
+                                }
+                                if($systemOcena->name == "śródroczna") {
+                                    $systemOcena->name = "srodroczna";
+                                }
+                                if($systemOcena-> name == "przewidywana roczna") {
+                                    $systemOcena->name = "przewidywana_roczna";
+                                }
+                                echo <<< END
+                                    <input type="hidden" class="$systemOcena->name" name="$systemOcena->name" value="$systemOcena->value" id="$systemOcena->name-$item->usersId">
+                                END; }}}
+
+                    echo <<< END
+                                </div>
                                 </tr>
                     END;
                 }
@@ -300,7 +348,35 @@ Page::displayNavigation();
             submitBtn.addEventListener("click", (e) => {
 
                 let oceny = document.querySelectorAll('.ocenaValue')
+                var select = document.getElementById('aktualnakategoria');
+                var systemCategoryName = select.options[select.selectedIndex].text;
+                var ALERT = 0
                 oceny.forEach((ocena) => {
+                    if(systemCategoryName == "przewidywana śródroczna" || systemCategoryName == "śródroczna" || systemCategoryName == "przewidywana roczna" || systemCategoryName == "roczna") {
+                        if(systemCategoryName == "przewidywana śródroczna") {
+                            temporary = "przewidywana_srodroczna"
+                        }
+                        if(systemCategoryName == "śródroczna") {
+                            temporary = "srodroczna"
+                        }
+                        if(systemCategoryName == "przewidywana roczna") {
+                            temporary = "przewidywana_roczna"
+                        }
+                        if(systemCategoryName == "roczna") {
+                            temporary = "roczna"
+                        }
+
+                        let user = ocena.getAttribute("id")
+                        let url = 'input#'+temporary+'-'+user
+                        let Inputurl = document.querySelector(url)
+                        if(Inputurl != null && ocena.value != "") {
+                            ocena.classList.add('border2')
+                            e.preventDefault()
+                            ALERT = 1
+                        } else {
+                            ocena.classList.remove('border2')
+                        }
+                    }
                     const values = ["np", "-", "+","1", "2", "3", "4", "5", "6", "", "bz"];
                     if (!values.includes(ocena.value)) {
                         ocena.classList.add('border')
@@ -309,6 +385,13 @@ Page::displayNavigation();
                         ocena.classList.remove('border')
                     }
                 })
+                if(ALERT == 1) {
+                    Swal.fire(
+                        'Powielone oceny końcowe!',
+                        'Usuń oceny podświetlone na niebiesko.',
+                        'error'
+                    )
+                }
             })
 
             let showHideBtn = document.querySelector('.btn.showHide')
