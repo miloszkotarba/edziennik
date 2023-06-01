@@ -3,6 +3,7 @@ if (!isset($_SESSION)) session_start();
 
 class Page
 {
+
     public static function displayHeader($title, $css = NULL)
     {
         ?>
@@ -76,12 +77,15 @@ class Page
                         <span class="nav-item">Ogłoszenia</span>
                     </a>
                 </li>
+                <?php if($_SESSION['usersRole'] == 1)
+                    echo <<< END
                 <li>
-                    <a href="#">
+                    <a href="/kartaocen">
                         <i class="las la-print"></i>
-                        <span class="nav-item">Wydruki</span>
+                        <span class="nav-item">Karta ocen</span>
                     </a>
                 </li>
+                END; ?>
                 <li>
                     <a href="/profile">
                         <i class="las la-user-cog"></i>
