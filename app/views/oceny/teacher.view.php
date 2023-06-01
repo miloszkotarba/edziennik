@@ -22,7 +22,6 @@ Page::displayNavigation();
             <div class="content">
                 <ul>
                     <li><a href="/oceny/lista">Dodawanie i modyfikacja ocen</a></li>
-                    <li><a href="#">Przeglądanie ocen</a></li>
                 </ul>
             </div>
             <div class="header">
