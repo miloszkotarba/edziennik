@@ -14,7 +14,8 @@ class App
         '/student',
         '/subject',
         '/oddzial',
-        '/zajecia'
+        '/zajecia',
+        '/kartaocen'
     ];
     protected $controller = 'home';
     protected $method = 'index';
