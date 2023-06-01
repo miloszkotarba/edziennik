@@ -143,6 +143,7 @@ table td:last-child i {
     border-collapse: collapse;
 }
 
+
 .oceny tr:nth-child(even) {
     background: #f1f1f1;
 }
@@ -181,7 +182,6 @@ table td:last-child i {
 }
 
 .oceny td.ob {
-
     text-align: left !important;
 }
 
@@ -426,4 +426,9 @@ tdcomment {
 
 .border {
     border: 3px solid crimson !important;
+}
+
+.border2 {
+    border: 3px solid #6c9cd1 !important;
+
 }
