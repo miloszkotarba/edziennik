@@ -80,6 +80,7 @@ Page::displayNavigation();
                             <input type="hidden" value="$ocena->usersSurname $ocena->usersName" id="teacher">
                             <input type="hidden" value="$ocena->name" id="category">
                             <input type="hidden" value="$ocena->value" id="value">
+                            <input type="hidden" value="$ocena->ocenaId" id="ocenaId">
                             </a>
                             <div class="ocenatooltip">
                             <span class="category"></span>
@@ -128,6 +129,7 @@ Page::displayNavigation();
                                     <input type="hidden" value="$przewidywana_srodroczna->usersSurname $przewidywana_srodroczna->usersName" id="teacher">
                                     <input type="hidden" value="$przewidywana_srodroczna->name" id="category">
                                     <input type="hidden" value="$przewidywana_srodroczna->value" id="value">
+                                    <input type="hidden" value="$przewidywana_srodroczna->ocenaId" id="ocenaId">
                                     </a>
                                     <div class="ocenatooltip" style="text-align: left">
                                     <span class="category"></span>
@@ -155,6 +157,7 @@ Page::displayNavigation();
                                     <input type="hidden" value="$srodroczna->usersSurname $srodroczna->usersName" id="teacher">
                                     <input type="hidden" value="$srodroczna->name" id="category">
                                     <input type="hidden" value="$srodroczna->value" id="value">
+                                    <input type="hidden" value="$srodroczna->ocenaId" id="ocenaId">
                                     </a>
                                     <div class="ocenatooltip" style="text-align: left">
                                     <span class="category"></span>
@@ -185,6 +188,7 @@ Page::displayNavigation();
                             <input type="hidden" value="$ocena->usersSurname $ocena->usersName" id="teacher">
                             <input type="hidden" value="$ocena->name" id="category">
                             <input type="hidden" value="$ocena->value" id="value">
+                            <input type="hidden" value="$ocena->ocenaId" id="ocenaId">
                             </a>
                             <div class="ocenatooltip">
                             <span class="category"></span>
@@ -249,6 +253,7 @@ Page::displayNavigation();
                                     <input type="hidden" value="$przewidywana_roczna->usersSurname $przewidywana_roczna->usersName" id="teacher">
                                     <input type="hidden" value="$przewidywana_roczna->name" id="category">
                                     <input type="hidden" value="$przewidywana_roczna->value" id="value">
+                                    <input type="hidden" value="$przewidywana_roczna->ocenaId" id="ocenaId">
                                     </a>
                                     <div class="ocenatooltip" style="text-align: left">
                                     <span class="category"></span>
@@ -276,6 +281,7 @@ Page::displayNavigation();
                                     <input type="hidden" value="$roczna->usersSurname $roczna->usersName" id="teacher">
                                     <input type="hidden" value="$roczna->name" id="category">
                                     <input type="hidden" value="$roczna->value" id="value">
+                                    <input type="hidden" value="$roczna->ocenaId" id="ocenaId">
                                     </a>
                                     <div class="ocenatooltip" style="text-align: left">
                                     <span class="category"></span>
@@ -304,6 +310,9 @@ Page::displayNavigation();
 
             Oceny.forEach((ocena) => {
                 ocena.addEventListener("mouseover", () => {
+                    let link = ocena.querySelector('a')
+                    let idoceny = ocena.querySelector('input#ocenaId').getAttribute('value')
+                    link.setAttribute('href',"informacje/"+idoceny)
                     let tooltip = ocena.querySelector('.ocenatooltip')
                     tooltip.style.display = "flex"
                     let value = ocena.querySelector('input#value').getAttribute("value")
