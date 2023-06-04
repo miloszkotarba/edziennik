@@ -358,6 +358,19 @@ class Oceny extends Controller
         require 'views/oceny/student.grade.list.php';
     }
 
+    public function informacje($ocenaId = NULL) {
+        if($ocenaId == NULL) redirect('/oceny');
+        $this->is_student();
+        $studentId = $_SESSION['usersId'];
+        $final = $this->OcenaModel->getGradeForStudent($ocenaId,$studentId);
+        if(!$final) redirect('/oceny');
+        $oceny = array("nieprzygotowany","brak zadania", "+", "-");
+        if(in_array($final->value,$oceny)) {
+            $final->averageCount = 0;
+        }
+        require 'views/oceny/student.grade.list.show.php';
+    }
+
     public function szczegoly($gradeId = NULL, $studentId = NULL)
     {
         $this->is_teacher();
