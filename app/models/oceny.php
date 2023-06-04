@@ -203,4 +203,32 @@ WHERE ocenaId = :ocenaId;');
         if ($result) return true;
         else return false;
     }
+
+    public function getGradeForStudent($ocenaId,$studentId)
+    {
+        $this->db->query('SELECT CASE
+                WHEN o.value = "np" THEN "nieprzygotowany"
+                WHEN o.value = "bz" THEN "brak zadania"
+                ELSE o.value
+                        END value,
+                 (SELECT subjectName FROM subjects WHERE subjectId =
+                 (SELECT subjectId FROM Zajecia WHERE zajeciaId = o.zajeciaId)) subjectName,
+                 (SELECT name FROM categories WHERE categoryId = o.categoryId) category,
+                 (SELECT averageCount FROM categories WHERE categoryId = o.categoryId) averageCount,
+                 (SELECT weight FROM categories WHERE categoryId = o.categoryId) weight,
+                 comment, DATE_FORMAT(o.date, "%Y-%m-%d") date,
+                 (SELECT usersName FROM users WHERE usersId = (SELECT teacherId FROM Zajecia WHERE zajeciaId = o.zajeciaId)) usersName,
+                 (SELECT usersSurname FROM users WHERE usersId = (SELECT teacherId FROM Zajecia WHERE zajeciaId = o.zajeciaId)) usersSurname FROM Oceny o WHERE o.ocenaId = :ocenaId AND studentId = :studentId;');
+
+        $this->db->bind(':ocenaId', $ocenaId);
+        $this->db->bind(':studentId',$studentId);
+
+        $result = $this->db->single();
+
+        if ($this->db->rowCount() > 0) {
+            return $result;
+        } else {
+            return false;
+        }
+    }
 }
