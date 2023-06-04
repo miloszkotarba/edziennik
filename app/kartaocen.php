@@ -42,11 +42,13 @@ class KartaOcen extends Controller
         $data = "";
         $licznik = 0;
 
+        $date = date('Y-m-d H:i');
+
         foreach ($students as $student) {
 
             $studentId = $student->usersId;
 
-
+            $data .= '<span style="font-size: 0.9rem">Data wydruku: '.$date.'</span>';
             $data .= '<h2 style="margin-bottom: 0.5rem; font-size: 1.7rem; text-align: center; margin-bottom: 1rem">Karta Ocen</h2>';
             $data .= '<span style="font-size: 1.1rem">Uczeń: <b>' . $student->usersSurname . ' ' . $student->usersName . '</b></span><br/>';
             $data .= '<span style="font-size: 1.1rem">Klasa: <b>' . $student->klasa . '</b></span>';
@@ -194,6 +196,7 @@ class KartaOcen extends Controller
 
         $css = file_get_contents('css/teacher.css');
         $mpdf->SetTitle('Karta ocen');
+        $mpdf->setFooter('E-dziennik Kotika');
         $mpdf->writeHTML($css, 1);
         $mpdf->writeHTML("$data");
         $mpdf->Output();
