@@ -255,7 +255,7 @@ Page::displayNavigation();
                                     <input type="hidden" value="$przewidywana_roczna->value" id="value">
                                     <input type="hidden" value="$przewidywana_roczna->ocenaId" id="ocenaId">
                                     </a>
-                                    <div class="ocenatooltip" style="text-align: left">
+                                    <div class="ocenatooltip right" style="text-align: left">
                                     <span class="category"></span>
                                     <span class="date"></span>
                                     <span class="average">Licz do średniej: Nie</span>
@@ -283,7 +283,7 @@ Page::displayNavigation();
                                     <input type="hidden" value="$roczna->value" id="value">
                                     <input type="hidden" value="$roczna->ocenaId" id="ocenaId">
                                     </a>
-                                    <div class="ocenatooltip" style="text-align: left">
+                                    <div class="ocenatooltip right" style="text-align: left">
                                     <span class="category"></span>
                                     <span class="date"></span>
                                     <span class="average">Licz do średniej: Nie</span>
@@ -315,6 +315,9 @@ Page::displayNavigation();
                     link.setAttribute('href',"informacje/"+idoceny)
                     let tooltip = ocena.querySelector('.ocenatooltip')
                     tooltip.style.display = "flex"
+                    if(!tooltip.classList.contains('right')) {
+                        tooltip.classList.add('left')
+                    }
                     let value = ocena.querySelector('input#value').getAttribute("value")
                     let teacher = ocena.querySelector('input#teacher').getAttribute("value")
                     tooltip.querySelector('span.teacher').innerHTML = "Nauczyciel: " + teacher
