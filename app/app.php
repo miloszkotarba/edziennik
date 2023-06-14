@@ -15,7 +15,8 @@ class App
         '/subject',
         '/oddzial',
         '/zajecia',
-        '/kartaocen'
+        '/kartaocen',
+        '/terminarz'
     ];
     protected $controller = 'home';
     protected $method = 'index';
@@ -38,8 +39,7 @@ class App
                 if (method_exists($this->controller, $url[1])) {
                     $this->method = $url[1];
                     unset($url[1]);
-                }
-                else {
+                } else {
                     http_response_code(404);
                     require '404.php';
                     die();
