@@ -77,6 +77,12 @@ class Page
                         <span class="nav-item">Ogłoszenia</span>
                     </a>
                 </li>
+                <li>
+                    <a href="/terminarz">
+                        <i class="las la-calendar"></i>
+                        <span class="nav-item">Terminarz</span>
+                    </a>
+                </li>
                 <?php if($_SESSION['usersRole'] == 1)
                     echo <<< END
                 <li>
