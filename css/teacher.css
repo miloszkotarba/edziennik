@@ -263,7 +263,14 @@ span.ocena {
     display: none;
     z-index: 1000;
     top: 25px;
+}
+
+.ocenatooltip.left {
     left: 0;
+}
+
+.ocenatooltip.right {
+    right: 0;
 }
 
 .ocenatooltip .category {
