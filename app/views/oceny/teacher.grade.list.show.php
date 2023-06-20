@@ -7,7 +7,7 @@ Page::displayHeader("e-Dziennik Ocenianie", "teacher.css");
 Page::displayNavigation();
 ?>
     <main>
-        <div class="links-box" style="padding: 30px; width: 98%">
+        <div class="links-box" style="padding: 30px; width: 100%">
             <div class="header">
                 <h2 id="page-title">
                     <i class="las la-graduation-cap"></i>
@@ -16,12 +16,12 @@ Page::displayNavigation();
             </div>
         </div>
         <div style="margin-bottom: 1rem"></div>
-        <div class="links-box" style="width: 98%">
+        <div class="links-box" style="width: 100%">
             <div class="oceny" style="width: 100%">
                 <?php
                 if ($final) {
                     echo <<< END
-                    <table style="width: 100%">
+                    <table style="min-width: 100%">
                         <tbody>
                         <tr>
                             <th rowspan="2" class="nr" style="padding: 0 10px">Nr</th>
@@ -260,7 +260,7 @@ Page::displayNavigation();
                                     <input type="hidden" value="$przewidywana_roczna->name" id="category">
                                     <input type="hidden" value="$przewidywana_roczna->value" id="value">
                                     </a>
-                                    <div class="ocenatooltip" style="text-align: left">
+                                    <div class="ocenatooltip right" style="text-align: left">
                                     <span class="category"></span>
                                     <span class="date"></span>
                                     <span class="average">Licz do średniej: Nie</span>
@@ -287,7 +287,7 @@ Page::displayNavigation();
                                     <input type="hidden" value="$roczna->name" id="category">
                                     <input type="hidden" value="$roczna->value" id="value">
                                     </a>
-                                    <div class="ocenatooltip" style="text-align: left">
+                                    <div class="ocenatooltip right" style="text-align: left">
                                     <span class="category"></span>
                                     <span class="date"></span>
                                     <span class="average">Licz do średniej: Nie</span>
@@ -315,6 +315,9 @@ Page::displayNavigation();
             Oceny.forEach((ocena) => {
                 ocena.addEventListener("mouseover", () => {
                     let tooltip = ocena.querySelector('.ocenatooltip')
+                    if(!tooltip.classList.contains('right')) {
+                        tooltip.classList.add('left')
+                    }
                     tooltip.style.display = "flex"
                     let value = ocena.querySelector('input#value').getAttribute("value")
                     let teacher = ocena.querySelector('input#teacher').getAttribute("value")

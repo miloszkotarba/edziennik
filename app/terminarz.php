@@ -28,8 +28,12 @@ class Terminarz extends Controller
         require 'views/terminarz/teacher.view.php';
     }
 
-    public function szczegoly($oddzialId = NULL) {
-        if($oddzialId == NULL) redirect('/terminarz');
+    public function szczegoly($oddzialId = NULL)
+    {
+        $this->is_teacher();
+        if ($oddzialId == NULL) redirect('/terminarz');
+        $result = $this->Model->getEventsforClass($oddzialId);
+        $result = json_encode($result);
         require 'views/terminarz/oddzial.show.php';
     }
 
