@@ -10,8 +10,6 @@ Aplikacja internetowa e-dziennika pomaga zapoznać się z postępami dziecka w t
 ## Autorzy
 
 - Miłosz Kotarba [@miloszkotarba](https://www.github.com/miloszkotarba)
-- Piotr Komorowski  [@Piotrekk00](https://www.github.com/Piotrekk00)
-- Jan Wójcikowski   [@JanWojcikowski](https://www.github.com/JanWojcikowski)
 
 
 ## Instalacja
