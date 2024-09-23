@@ -1,6 +1,6 @@
 # Dziennik 
 
-E-dziennik jest projektem zaliczeniowym na zajęcia "Inżynieria Oprogramowania".
+E-dziennik jest projektem zaliczeniowym na zajęcia "Inżynieria Oprogramowania". Pierwszy projekt na studiach.
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 
