@@ -1,4 +1,4 @@
-# Dziennik 
+# e-Dziennik 🏫
 
 E-dziennik jest projektem zaliczeniowym na zajęcia "Inżynieria Oprogramowania". Pierwszy projekt na studiach.
 Napisany w PHP, baza danych MariaDB.
@@ -15,4 +15,22 @@ Aplikacja internetowa e-dziennika pomaga zapoznać się z postępami dziecka w t
 
 ## Instalacja
 - Do napisania
-    
+
+## 🔗 Demo
+- **Strona:**  
+   [https://edziennik.kotika.pl](https://edziennik.kotika.pl)  
+      
+      Zapraszam do korzystania ze strony! Możesz sprawdzić funkcjonalność e-dziennika, używając poniższych kont demonstracyjnych.
+
+
+#### Konto demonstracyjne administratora:
+- **Login:** admin  
+- **Password:** Demodemo38  
+
+#### Konto demonstracyjne nauczyciela:
+- **Login:** jfrankiewicz  
+- **Password:** Demodemo38  
+
+#### Konto demonstracyjne ucznia:
+- **Login:** jborkowski  
+- **Password:** Demodemo38  
